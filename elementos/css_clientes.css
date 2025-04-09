@@ -1,8 +1,10 @@
 body{
     font-family: 'Arial', sans-serif;
 }
+
 header div {
     display: inline-flex;
+    gap: 10px;
 }
 
 header img{
@@ -12,9 +14,12 @@ header img{
     margin-bottom: 8px;
     margin-right: 30px;
 }
-header h1 {
-    margin-right: 30px;
+
+.secciones{
+    margin-left: -20px;
+    margin-bottom: 35px;
 }
+
 header hr {
     border: none;
     height: 4px;
@@ -29,8 +34,17 @@ header img{
     cursor: pointer;
 } 
 
+.campo-busqueda {
+    width: 800px; 
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
 header button {
-    margin-top: 26px;    
+    margin-top: 25px;    
     background-color: #005B1C; 
     color: #F2E6CD; 
     font-family: 'Arial', sans-serif; 
@@ -46,12 +60,12 @@ header button {
     transition: all 0.3s ease;
 }
 
-header button:hover {
+header button:hover{
     background-color: #F2E6CD; 
     border-color: #005B1C;
     color: #005B1C;
 }
 
 .btn-busqueda i {
-    margin-right: 8px;
+    margin-right: 0px;
 }
