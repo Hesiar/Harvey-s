@@ -25,7 +25,6 @@
         <form action="/Harvey-s/login.html">
             <button class="btn-login" type="submit">
                 <i class="fas fa-user"></i>
-                Iniciar sesión
             </button>
         </form>
 
