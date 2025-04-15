@@ -16,9 +16,9 @@
             </button>
         </form>
 
-        <form action="/Harvey-s/fqa.html">
-            <button class="btn-fqa" type="submit">
-                <i class="fas fa-question-circle"></i>
+        <form action="/Harvey-s/faq.html">
+            <button class="btn-faq" type="submit">
+                <i class="fas fa-question"></i>
             </button>
         </form>
 
