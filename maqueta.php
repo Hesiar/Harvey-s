@@ -9,8 +9,32 @@
     <title>Harvey's</title>
 </head>
 <body>
-    <?php include 'header.php'; ?>  
-    
+    <?php 
+        include 'header.php';
+        include 'div_login.php';
+        /*include 'div_recuperacion.php';
+        include 'div_registro.php';
+        include 'div_carrito.php';*/
+        include 'div_secciones.php';
+        include 'div_home.php';
+        /*include 'footer.php';*/
+    ?>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <!-- Preguntar a Natalia sobre la inclusion jQuery and jQuery UI en uno o varios archivos -->
+
+    <script>
+        $(document).ready(function(){
+            $('.btn-login').on('click', function(e){
+                e.preventDefault();
+                $('.divLogin').animate({right: '1rem'}, 400);
+            });
+            $('.secciones').on('click', function(e){
+                $('.divSecciones').animate({left: '1rem'}, 400);
+            });
+        });
+    </script>
 
 </body>
 </html>

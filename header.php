@@ -1,6 +1,6 @@
 <header>     
     <div>
-        <a href="/Harvey-s/maqueta.html">
+        <a href="/Harvey-s/maqueta.php">
             <img src="/Harvey-s/elementos/Harveys_logo.png" alt="Logo de Harvey's">
         </a>
 
@@ -22,7 +22,7 @@
             </button>
         </form>
 
-        <form action="/Harvey-s/login.html">
+        <form action="">
             <button class="btn-login" type="submit">
                 <i class="fas fa-user"></i>
             </button>
@@ -37,4 +37,5 @@
     </div>
 
     <hr>
+
 </header>
