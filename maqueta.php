@@ -17,12 +17,11 @@
         include 'div_carrito.php';*/
         include 'div_secciones.php';
         include 'div_home.php';
-        /*include 'footer.php';*/
+        include 'footer.php';
     ?>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-    <!-- Preguntar a Natalia sobre la inclusion jQuery and jQuery UI en uno o varios archivos -->
 
     <script>
         $(document).ready(function(){
