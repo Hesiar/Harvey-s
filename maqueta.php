@@ -17,6 +17,7 @@
         include 'div_carrito.php';*/
         include 'div_secciones.php';
         include 'div_home.php';
+        include 'div_empleados.php';
         include 'footer.php';
     ?>
 
@@ -31,6 +32,10 @@
             });
             $('.secciones').on('click', function(e){
                 $('.divSecciones').animate({left: '1rem'}, 400);
+            });
+            $('.btn-empleados').on('click', function(e){
+                e.preventDefault();
+                $('.divEmpleados').animate({left: '1rem'}, 400);
             });
         });
     </script>

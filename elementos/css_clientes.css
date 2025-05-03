@@ -213,10 +213,22 @@
     border: 2px solid #950000;
   }
   
-  .divSecciones, .divEmpleados {
+  .divSecciones {
     position: fixed;
     top: 0.5rem;       
     left: -320px;    
+    background-color: #fff;
+    padding: 1rem;   
+    border: 2px solid #ccc; 
+    border-radius: 8px;    
+    width: auto;  
+    height: auto;
+  }
+
+  .divEmpleados {
+    position: fixed;
+    top: 0.5rem;       
+    left: -400px ;    
     background-color: #fff;
     padding: 1rem;   
     border: 2px solid #ccc; 

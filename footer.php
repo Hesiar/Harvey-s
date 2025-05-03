@@ -20,17 +20,10 @@
             </i>Armando Herrero Silva</a>
         </p>
         <p>Esta página es parte del proyecto final del grado de Desarrollo de Aplicaciones Web (D.A.W.)</p>
-    </div>
-    <div class='divEmpleados'>
-        <label for="Cerrar" class="back-button_secciones" id="Cerrar">
-            <i class="fas fa-times"></i>
-        </label>
-        <form action="#" method="post">
-        <h2>Entrar a la zona de empleados</h2>
-        <input type="text" name="user_empleado" placeholder="ID Empleado" required>
-        <input type="password" name="contrasena" placeholder="Contraseña" required>
-        <button type="submit">Entrar</button>
-        <p><a href="/Harvey-s/recuperar_contrasena_empleados.php">¿Olvidaste tu contraseña?</a></p>
-    </form>
+        <form action="">
+            <button class="btn-empleados" type="submit">
+                <i class="fas fa-user">Empleados</i>
+            </button>
+        </form>
     </div>
 </footer>
