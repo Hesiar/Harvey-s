@@ -10,6 +10,8 @@
 
     function enviarCorreoBienvenida($destinatario, $nombre) {
         $mail = new PHPMailer(true);
+        $mail->CharSet = 'UTF-8';
+        $mail->setLanguage('es', __DIR__ . '/vendor/phpmailer/phpmailer/language/');
 
         try {
             $mail->isSMTP();
@@ -29,7 +31,7 @@
             $mail->Subject = 'Bienvenido a Harvey\'s';
             $mail->addEmbeddedImage(__DIR__ . '/elementos/Harveys_logo.png', 'logo_harveys');
             $mail->Body    = '
-                <html>
+                <html lang="es">
                     <head>
                         <meta charset="utf-8">
                         <title>Bienvenido a Harvey\'s</title>

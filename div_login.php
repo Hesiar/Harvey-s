@@ -14,7 +14,7 @@
         <button type="submit">Iniciar sesión</button>
         <div id="login-response"></div>
         <p>¿No tienes cuenta? <button type="submit" id="btn-registro">Regístrate aquí</button></p>
-        <p><a href="/Harvey-s/recuperar_contrasena.php">¿Olvidaste tu contraseña?</a></p>
+        <p>¿Olvidaste tu contraseña? <button type="submit" id="btn-recuperacion">Recuperar contraseña</button></p>
     </form>
 </div>
 
@@ -58,5 +58,32 @@
             e.preventDefault();
             $('.divRegistro').animate({ right: '1rem' }, 400);
         });
+
+        $('#btn-recuperacion').on('click', function(e) {
+            e.preventDefault();
+            
+            var correo = prompt("Introduce tu correo para la recuperación de contraseña:");
+            
+            if (correo && correo.trim() !== "") {
+                $.ajax({
+                    url: "correo_recuperacion.php",
+                    type: "POST",
+                    data: { correo: correo },
+                    success: function(response) {
+                        if (response.trim() === "success") {
+                            alert("Se ha mandado un correo a la dirección especificada.");
+                        } else {
+                            alert("Error en el envío: " + response);
+                        }
+                    },
+                    error: function() {
+                        alert("Ocurrió un error al enviar el correo.");
+                    }
+                    });
+            } else {
+                alert("No has ingresado un correo válido.");
+            }
+        });
+
     });
 </script>

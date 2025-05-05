@@ -1,4 +1,5 @@
 <?php
+    session_start();
 
     $host   = 'localhost';
     $dbname = 'harveys_DB';
@@ -30,9 +31,9 @@
 
         if ($empleado && password_verify($clave, $empleado['clave'])) {
             $_SESSION['empleado'] = $empleado['id'];
-            echo "<div class='login-success'>Bienvenido, " . htmlspecialchars($empleado['nombre']) . " " . htmlspecialchars($empleado['apellido']) . "</div>";
+            echo "success";
         } else {
-            echo "Usuario o contraseña incorrectos.";
+            echo "<p style='color: red;'><strong>Usuario o contraseña incorrectos.</strong></p>";
         }
     }
 ?>
