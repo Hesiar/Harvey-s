@@ -23,6 +23,8 @@ CREATE TABLE IF NOT EXISTS empleados (
     fecha_contratacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     puesto_id INT,
     antiguedad INT DEFAULT NULL,
+    dni VARCHAR(9) NOT NULL UNIQUE,
+    usuario VARCHAR(9) NOT NULL,
     FOREIGN KEY (puesto_id) REFERENCES puestos(id)
 );
 
@@ -111,6 +113,8 @@ INSERT INTO puestos (nombre, descripcion, salario_base) VALUES
     ('Marketing y publicidad', 'Encargado de promociones y campañas.', 1800.00),
     ('Administrativo', 'Maneja la documentación y atención al cliente.', 1800.00),
     ('Técnico en mantenimiento', 'Encargado de mantenimiento de equipos.', 1500.00);
+
+-- TODO: En clientes y empleados: Al insertar valores de provincia, hacer un update. Ahora mismo inserta CCAA en vez de provincia.
 
 INSERT INTO empleados (nombre, apellido, email, clave, telefono, direccion, ciudad, provincia, codigo_postal, fecha_contratacion, puesto_id) VALUES
     ('Elena', 'Santos', 'esantos@gmail.com', NULL, '555-2001', 'Calle de la Esperanza 12', 'Madrid', 'Madrid', '28015', '2019-06-10', 1),

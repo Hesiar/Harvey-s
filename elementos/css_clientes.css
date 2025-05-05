@@ -13,6 +13,8 @@
     background-color: #fff;  
     border-bottom: 1px solid #ccc; 
     width: 100%;
+    position: sticky;
+    top: 0;
   }
   
   header div {
@@ -192,6 +194,64 @@
     height: 400px;
   }
 
+  .divCuenta {
+    position: fixed;
+    top: 0.5rem;       
+    right: -320px;     
+    background-color: #fff;
+    padding: 1rem;   
+    border: 2px solid #ccc; 
+    border-radius: 8px;    
+    width: 300px;  
+    height: 400px;
+}
+.divCuenta h2 {
+    margin-bottom: 15px;
+}
+.divCuenta p {
+    margin: 5px 0;
+}
+.divCuenta a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+}
+.divCuenta a:hover {
+    text-decoration: underline;
+}
+
+  .divRegistro {
+    position: fixed;
+    top: 0.5rem;       
+    right: -320px;     
+    background-color: #fff;
+    padding: 1rem;   
+    border: 2px solid #ccc; 
+    border-radius: 8px;    
+    width: 300px;  
+    height: 400px;
+  }
+
+  .divCarrito {
+    position: fixed;
+    top: 0.5rem;       
+    right: -320px;     
+    background-color: #fff;
+    padding: 1rem;   
+    border: 2px solid #ccc; 
+    border-radius: 8px;    
+    width: 300px;  
+    height: 400px;
+  }
+
+  .login-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-top: 1rem;
+}
+
   #Cerrar {
     cursor: pointer;
     display: inline-flex;
@@ -228,7 +288,7 @@
   .divEmpleados {
     position: fixed;
     top: 0.5rem;       
-    left: -400px ;    
+    left: -550px ;    
     background-color: #fff;
     padding: 1rem;   
     border: 2px solid #ccc; 

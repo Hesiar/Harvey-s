@@ -16,7 +16,7 @@
             </button>
         </form>
 
-        <form action="/Harvey-s/faq.html">
+        <form action="/Harvey-s/faq.php">
             <button class="btn-faq" type="submit">
                 <i class="fas fa-question"></i>
             </button>
@@ -28,7 +28,7 @@
             </button>
         </form>
 
-        <form action="/Harvey-s/carrito.html">
+        <form action="">
             <button class="btn-carrito" type="submit">
                 <i class="fas fa-shopping-cart"></i>
                 Carrito
