@@ -12,10 +12,11 @@
     <?php 
         include 'header.php';
         include 'div_login.php';
+        //include 'div_recuperacion.php';
         include 'div_registro.php';
         include 'div_carrito.php';
         include 'div_secciones.php';
-        include 'div_home.php';
+        include 'mostrar_bebidas.php';
         include 'div_empleados.php';
         include 'footer.php';
     ?>

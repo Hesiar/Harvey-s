@@ -10,7 +10,7 @@
         <input type="password" name="clave" id="clave" placeholder="Contraseña">
         <div id="login-response-empleados"></div>
         <button type="submit">Entrar</button>
-        <p><a href="/Harvey-s/recuperar_contrasena_empleados.php">¿Olvidaste tu contraseña?</a></p>
+        <p><a href="#" onclick="alert('Por motivos de seguridad, contacta con RRHH para obtener tu contraseña')">¿Olvidaste tu contraseña?</a></p>
     </form>
     </div>
 
