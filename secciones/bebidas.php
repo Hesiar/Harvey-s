@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../elementos/css/css_clientes.css">
     <link rel="icon" href="../elementos/pics/icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- Iconos de Font Awesome -->
-    <title>Harvey's</title>
+    <title>Harvey's | Bebidas</title>
 </head>
 <body>
     <?php 
@@ -15,14 +15,17 @@
         include '../divs/div_registro.php';
         include '../divs/div_carrito.php';
         include '../divs/div_secciones.php';
-        include 'mostrar_bebidas.php';
         include '../divs/div_empleados.php';
+    ?>
+    <div class="productos-container">
+        <script src="\Harvey-s\elementos\scripts\script_bebidas.js"></script>
+    </div>
+    <?php
         include '../layout/footer.php';
     ?>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-    <script src="\Harvey-s\scripts\scripts_home.js"></script>
+    <script src="\Harvey-s\elementos\scripts\scripts_home.js"></script>
 
 </body>
 </html>

@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../elementos/css/css_clientes.css">
     <link rel="icon" href="../elementos/pics/icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- Iconos de Font Awesome -->
-    <title>Harvey's | FAQs</title>
+    <title>Harvey's | Panadería</title>
 </head>
 <body>
     <?php 
@@ -14,34 +14,18 @@
         include '../divs/div_login.php';
         include '../divs/div_registro.php';
         include '../divs/div_carrito.php';
-        include '../divs/div_faq.php';
         include '../divs/div_secciones.php';
         include '../divs/div_empleados.php';
+    ?>
+    <div class="productos-container">
+        <script src="\Harvey-s\elementos\scripts\script_panaderia.js"></script>
+    </div>
+    <?php
         include '../layout/footer.php';
     ?>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-
-    <script>
-        $(document).ready(function(){
-            $('.btn-login').on('click', function(e){
-                e.preventDefault();
-                $('.divLogin').animate({right: '1rem'}, 400);
-            });
-            $('.btn-carrito').on('click', function(e){
-                e.preventDefault();
-                $('.divCarrito').animate({right: '1rem'}, 400);
-            });
-            $('.secciones').on('click', function(e){
-                $('.divSecciones').animate({left: '1rem'}, 400);
-            });
-            $('.btn-empleados').on('click', function(e){
-                e.preventDefault();
-                $('.divEmpleados').animate({left: '1rem'}, 400);
-            });
-        });
-    </script>
+    <script src="\Harvey-s\elementos\scripts\scripts_home.js"></script>
 
 </body>
 </html>
