@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="elementos/css_clientes.css">
-    <link rel="icon" href="elementos/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../elementos/css/css_clientes.css">
+    <link rel="icon" href="../elementos/pics/icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- Iconos de Font Awesome -->
     <title>Harvey's</title>
 </head>
 <body>
     <?php 
-        include 'header.php';
-        include 'div_login.php';
-        //include 'div_recuperacion.php';
-        include 'div_registro.php';
-        include 'div_carrito.php';
-        include 'div_faq.php';
-        include 'div_secciones.php';
-        include 'div_empleados.php';
-        include 'footer.php';
+        include '../layout/header.php';
+        include '../divs/div_login.php';
+        include '../divs/div_registro.php';
+        include '../divs/div_carrito.php';
+        include '../divs/div_faq.php';
+        include '../divs/div_secciones.php';
+        include '../divs/div_empleados.php';
+        include '../layout/footer.php';
     ?>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

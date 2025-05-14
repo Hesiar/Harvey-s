@@ -2,7 +2,7 @@
     <label for="Cerrar" class="back-button-registro" id="Cerrar">
         <i class="fas fa-times"></i>
     </label>
-    <form action="registro.php" method="post" id="formRegistro">
+    <form action="../correos/registro.php" method="post" id="formRegistro">
         <h2>Registro de Cliente</h2>
         <label for="nombre">Nombre:</label>
         <input type="text" name="nombre" placeholder="Nombre">

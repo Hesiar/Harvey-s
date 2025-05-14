@@ -1,7 +1,7 @@
 <header>     
     <div>
-        <a href="/Harvey-s/maqueta.php">
-            <img src="/Harvey-s/elementos/Harveys_logo.png" alt="Logo de Harvey's">
+        <a href="/Harvey-s/layout/maqueta.php">
+            <img src="/Harvey-s/elementos/pics/Harveys_logo.png" alt="Logo de Harvey's">
         </a>
 
         <button class="secciones" type="button">
@@ -9,14 +9,14 @@
             Secciones
         </button>
 
-        <form id="busqueda" action="/Harvey-s/buscar.php" method="get">
+        <form id="busqueda" action="#" method="get">
             <input class="campo-busqueda" type="text" placeholder="Buscar en Harvey's" name="search" required>
             <button class="btn-busqueda" type="submit">
                 <i class="fas fa-search"></i>
             </button>
         </form>
 
-        <form action="/Harvey-s/faq.php">
+        <form action="/Harvey-s/secciones/faq.php">
             <button class="btn-faq" type="submit">
                 <i class="fas fa-question"></i>
             </button>

@@ -2,7 +2,7 @@
     <label for="Cerrar" class="back-button" id="Cerrar">
         <i class="fas fa-times"></i>
     </label>
-    <form action="login.php" method="post" id="formLogin">
+    <form action="../autenticacion/login.php" method="post" id="formLogin">
         <h2>Iniciar sesión</h2>
         <label for="correo">Correo: </label>
         <input type="text" name="correo" placeholder="Correo">
@@ -66,7 +66,7 @@
             
             if (correo && correo.trim() !== "") {
                 $.ajax({
-                    url: "correo_recuperacion.php",
+                    url: "../correos/correo_recuperacion.php",
                     type: "POST",
                     data: { correo: correo },
                     success: function(response) {

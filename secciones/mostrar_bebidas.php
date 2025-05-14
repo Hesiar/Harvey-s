@@ -1,7 +1,7 @@
 <div class="productos-container"></div>
 
 <script>
-    fetch('conexion_bebidas.php')
+    fetch('../secciones/conexion_bebidas.php')
         .then(response => response.json())
         .then(productos => {
             const container = document.querySelector('.productos-container');

@@ -36,8 +36,10 @@
                 ':id'      => $cliente['id']
             ]);
 
-            $urlRecuperacion = "http://localhost/Harvey-s/pagina_recuperacion.php?token=" . $token;
-
+            $baseUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http')
+                . '://' . $_SERVER['HTTP_HOST'];
+            $urlRecuperacion = $baseUrl . '/Harvey-s/autenticacion/pagina_recuperacion.php?token=' . $token;
+        
             if (enviarCorreoRecuperacion($cliente['email'], $cliente['nombre'], $urlRecuperacion)) {
                 echo "success";
                 exit;

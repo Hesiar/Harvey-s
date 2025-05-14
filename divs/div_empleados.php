@@ -2,7 +2,7 @@
         <label for="Cerrar" class="back-button_empleados" id="Cerrar">
             <i class="fas fa-times"></i>
         </label>
-        <form action="login_empleados.php" method="post" id="formEmpleados">
+        <form action="../autenticacion/login_empleados.php" method="post" id="formEmpleados">
         <h2>Entrar a la zona de empleados</h2>
         <label for="user_empleado">Usuario: </label>
         <input type="text" name="usuario" id="usuario" placeholder="ID Empleado">
@@ -35,7 +35,7 @@
                     data: $(this).serialize(),
                     success: function(response) {
                         if (response === "success") { 
-                            window.open('/Harvey-s/pagina_empleados.php', '_blank'); 
+                            window.open('/Harvey-s/empleados/pagina_empleados.php', '_blank'); 
                             
                             $('.divEmpleados').animate({left: '-550px'}, 400, function(){
                                 $("#formEmpleados")[0].reset();

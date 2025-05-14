@@ -3,15 +3,15 @@
     use PHPMailer\PHPMailer\Exception;
     use Dotenv\Dotenv;
 
-    require __DIR__ . '/vendor/autoload.php';
+    require __DIR__ . '/../vendor/autoload.php';
 
-    $dotenv = Dotenv::createImmutable(__DIR__ . '/elementos', 'credenciales_gmail_Harveys.env');
+    $dotenv = Dotenv::createImmutable(__DIR__ . '/../elementos/credenciales', 'credenciales_gmail_Harveys.env');
     $dotenv->load();
 
     function enviarCorreoRecuperacion($destinatario, $nombre, $urlRecuperacion) {
         $mail = new PHPMailer(true);
         $mail->CharSet = 'UTF-8';
-        $mail->setLanguage('es', __DIR__ . '/vendor/phpmailer/phpmailer/language/');
+        $mail->setLanguage('es', __DIR__ . '/../vendor/phpmailer/phpmailer/language/');
 
         try {
             $mail->isSMTP();
@@ -20,7 +20,7 @@
             $mail->SMTPAuth   = true;
             $mail->Username   = $_ENV['SMTP_USERNAME'];
             $mail->Password   = $_ENV['SMTP_PASSWORD'];
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // O usa ENCRYPTION_SMTPS si tu servidor lo requiere
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = $_ENV['SMTP_PORT'];
 
             $mail->setFrom($_ENV['SMTP_FROM_EMAIL'], $_ENV['SMTP_FROM_NAME']);
@@ -28,7 +28,7 @@
 
             $mail->isHTML(true);
             $mail->Subject = 'Recuperación de Contraseña - Harvey\'s';
-            $mail->addEmbeddedImage(__DIR__ . '/elementos/Harveys_logo.png', 'logo_harveys');
+            $mail->addEmbeddedImage(__DIR__ . '/../elementos/pics/Harveys_logo.png', 'logo_harveys');
             $mail->Body = '
                 <html lang="es">
                     <head>
@@ -37,7 +37,7 @@
                     </head>
                     <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
                         <div style="background-color: #005B1C; padding: 10px;">
-                            <h3 style="margin: 0; color: #F2E6CD;">Recuperación de Contraseña</h3>
+                            <h3 style="margin: 0; color:rgb(255, 255, 255);">Recuperación de Contraseña</h3>
                         </div>
                         <p><strong>Hola ' . htmlspecialchars($nombre) . ',</strong></p>
                         <p>Hemos recibido una solicitud para restablecer tu contraseña.</p>
@@ -107,8 +107,10 @@
             ':id'      => $usuario['id']
         ]);
     
-        $urlRecuperacion = "http://localhost/Harvey-s/pagina_recuperacion.php?token=" . $token;
-    
+        $baseUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http')
+            . '://' . $_SERVER['HTTP_HOST'];
+        $urlRecuperacion = $baseUrl . '/Harvey-s/autenticacion/pagina_recuperacion.php?token=' . $token;
+        
         if (enviarCorreoRecuperacion($usuario['email'], $usuario['nombre'], $urlRecuperacion)) {
             echo "success";
         } else {

@@ -3,7 +3,7 @@ session_start();
 
 // Verificar si el empleado ha iniciado sesión
 if (!isset($_SESSION['empleado'])) {
-    header("Location: /Harvey-s/maqueta.php");
+    header("Location: /Harvey-s/layput/maqueta.php");
     die();
 }
 
@@ -32,7 +32,7 @@ $empleado = $stmt->fetch(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="elementos/icon.ico" type="image/x-icon">
+    <link rel="icon" href="../elementos/pics/icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- Iconos de Font Awesome -->
     <title>Zona de Empleados - Harvey's</title>
     <link rel="stylesheet" href="/Harvey-s/estilos.css">
@@ -51,7 +51,7 @@ $empleado = $stmt->fetch(PDO::FETCH_ASSOC);
 
         <script>
             function cerrarSesion() {
-                fetch('/Harvey-s/logout_empleados.php', { method: 'POST' })
+                fetch('/Harvey-s/autenticacion/logout_empleados.php', { method: 'POST' })
                     .then(() => window.close());
             }
         </script>
