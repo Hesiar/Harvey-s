@@ -3,12 +3,12 @@
         <i class="fas fa-times"></i>
     </label>
     <h1><a href="../secciones/bebidas.php">Bebidas</a></h1>
-    <h1><a href="../secciones/carnes.php">Carne y embutidos</h1>
-    <h1><a href="../secciones/conservas.php">Conservas</h1>
-    <h1><a href="../secciones/desayunos.php">Desayunos, dulces, frutos secos</h1>
-    <h1><a href="../secciones/frutas_verduras.php">Frutas y verduras</h1>
-    <h1><a href="../secciones/lacteos.php">Lácteos</h1>
-    <h1><a href="../secciones/panaderia.php">Panadería</h1>
+    <h1><a href="../secciones/carnes.php">Carne y embutidos</a></h1>
+    <h1><a href="../secciones/conservas.php">Conservas</a></h1>
+    <h1><a href="../secciones/desayunos.php">Desayunos, dulces, frutos secos</a></h1>
+    <h1><a href="../secciones/frutas_verduras.php">Frutas y verduras</a></h1>
+    <h1><a href="../secciones/lacteos.php">Lácteos</a></h1>
+    <h1><a href="../secciones/panaderia.php">Panadería</a></h1>
 
 </div>
 

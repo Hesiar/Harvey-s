@@ -1,9 +1,8 @@
 <?php
 session_start();
 
-// Verificar si el empleado ha iniciado sesión
 if (!isset($_SESSION['empleado'])) {
-    header("Location: /Harvey-s/layput/maqueta.php");
+    header("Location: /Harvey-s/layout/maqueta.php");
     die();
 }
 
@@ -19,7 +18,6 @@ try {
     die("Error en la conexión: " . $e->getMessage());
 }
 
-// Obtener datos del empleado
 $stmt = $pdo->prepare("SELECT * FROM empleados WHERE id = :id");
 $stmt->bindParam(':id', $_SESSION['empleado']);
 $stmt->execute();

@@ -7,11 +7,11 @@
             <a href="https://www.instagram.com" target="_blank">Instagram</a>
         </p>
         <div class="redes-sociales">
-        <a href="https://www.facebook.com/Harveys" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://twitter.com/Harveys" target="_blank"><i class="fab fa-twitter"></i></a>
-        <a href="https://www.instagram.com/Harveys" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.linkedin.com/company/harveys" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-    </div>
+            <a href="https://www.facebook.com/Harveys" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/Harveys" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/Harveys" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/harveys" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        </div>
         <p>Contact us: <a href="mailto: mail@corporativo.com"></a></p>
         <p>Address: Calle Falsa 123, Ciudad, País</p>
         <p>Phone: +1 (555) 123-4567</p>
