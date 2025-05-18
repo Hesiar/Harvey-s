@@ -18,7 +18,7 @@
         include '../divs/div_empleados.php';
     ?>
     <div class="productos-container">
-        <script src="\Harvey-s\elementos\scripts\script_bebidas.js"></script>
+        <script src="../elementos/scripts/script_bebidas.js"></script>
     </div>
     <?php
         include '../layout/footer.php';
