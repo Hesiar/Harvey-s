@@ -1,5 +1,7 @@
 <?php
 
+    session_start();
+
     $host = 'localhost';
     $dbname = 'harveys_DB';
     $dbuser = 'root';        
@@ -22,8 +24,6 @@
         if ($usuario) {
             $_SESSION['nombre'] = $usuario['nombre'];
             $_SESSION['email'] = $usuario['email'];
-            header("Location: cuenta.php");
-            exit;
         }
     }
 

@@ -42,7 +42,7 @@
                 success: function(response) {
                     if (response.trim() === "success") {
                         $('.divLogin').animate({ right: '-320px' }, 400, function(){
-                            window.location.href = "maqueta.php";
+                            window.location.href = "../secciones/cuenta.php";
                         });
                     } else {
                         $("#login-response").html(response);
@@ -71,7 +71,7 @@
                     data: { correo: correo },
                     success: function(response) {
                         if (response.trim() === "success") {
-                            alert("Se ha mandado un correo a la dirección especificada.");
+                            alert("Si usted tuviese una cuenta registrada con nosotros, revise su correo. No olvide de revisar la carpeta de spam.");
                         } else {
                             alert("Error en el envío: " + response);
                         }
@@ -81,7 +81,7 @@
                     }
                     });
             } else {
-                alert("No has ingresado un correo válido.");
+                alert("Si usted tuviese una cuenta registrada con nosotros, revise su correo. No olvide de revisar la carpeta de spam.");
             }
         });
 

@@ -8,6 +8,6 @@
     $_SESSION = [];
     session_destroy();
 
-    header("Location: maqueta.php");
+    header("Location: ../layout/home.php");
     exit;
 ?>

@@ -19,13 +19,10 @@
 </head>
 <body>
     <?php 
-        include '../layout/header.php';
-        include '../divs/div_login.php';
-        include '../divs/div_registro.php';
+        include '../layout/header_logged.php';
         include '../divs/div_carrito.php';
-        include '../divs/div_secciones.php';
+        include '../divs/div_secciones_logged.php';
         include '../divs/div_empleados.php';
-        include '../layout/footer.php';
     ?>
     <h2>Detalle del carrito</h2>
 
@@ -58,9 +55,12 @@
 
     <button onclick="finalizarCompra()">Finalizar compra</button>
 
+    <?php
+        include '../layout/footer.php';
+    ?>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-    <script src="\Harvey-s\elementos\scripts\scripts_home.js"></script>
+    <script src="\Harvey-s\elementos\scripts\scripts_home_logged.js"></script>
 
     <script>
         function actualizarCantidad(nombre, nuevaCantidad) {

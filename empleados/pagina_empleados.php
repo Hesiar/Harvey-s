@@ -2,7 +2,11 @@
 session_start();
 
 if (!isset($_SESSION['empleado'])) {
-    header("Location: /Harvey-s/layout/maqueta.php");
+    if(isset($_SESSION['usuario_id'])) {
+        header("Location: /Harvey-s/layout/home_logged.php");
+        die();
+    }
+    header("Location: /Harvey-s/layout/home.php");
     die();
 }
 

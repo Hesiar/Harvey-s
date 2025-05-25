@@ -1,6 +1,6 @@
 <header>     
     <div>
-        <a href="/Harvey-s/layout/home.php">
+        <a href="/Harvey-s/layout/home_logged.php">
             <img src="/Harvey-s/elementos/pics/Harveys_logo.png" alt="Logo de Harvey's">
         </a>
 
