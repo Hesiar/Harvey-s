@@ -8,7 +8,7 @@
     $dotenv = Dotenv::createImmutable(__DIR__ . '/../elementos/credenciales', 'credenciales_gmail_Harveys.env');
     $dotenv->load();
 
-    function enviarCorreoBienvenida($destinatario, $nombre, $enlace_verificacion) {
+    function enviarCorreoEliminacion($destinatario, $nombre) {
         $mail = new PHPMailer(true);
         $mail->CharSet = 'UTF-8';
         $mail->setLanguage('es', __DIR__ . '/../vendor/phpmailer/phpmailer/language/');
@@ -27,33 +27,32 @@
             $mail->addAddress($destinatario, $nombre);
 
             $mail->isHTML(true);
-            $mail->Subject = 'Bienvenido a Harvey\'s';
+            $mail->Subject = 'Cuenta eliminada - Harvey\'s';
             $mail->addEmbeddedImage(__DIR__ . '/../elementos/pics/Harveys_logo.png', 'logo_harveys');
             $mail->Body    = '
                 <html lang="es">
                     <head>
                         <meta charset="utf-8">
-                        <title>Bienvenido a Harvey\'s</title>
+                        <title>Cuenta eliminada</title>
                     </head>
                     <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-                        <div style="background-color: #005B1C; padding: 10px;">
-                            <h1 style="margin: 0; color:rgb(255, 255, 255);">¡Bienvenido a nuestra gran familia de Harvey\'s!</h1>
+                        <div style="background-color: #8B0000; padding: 10px;">
+                            <h1 style="margin: 0; color: white;">Tu cuenta en Harvey\'s ha sido eliminada</h1>
                         </div>
                         <p><strong>Hola ' . htmlspecialchars($nombre) . ',</strong></p>
-                        <p>Gracias por registrarte en nuestro club de clientes.<br>Esperamos que disfrutes de nuestras ofertas exclusivas para los miembros del club.</p>
-                        <p>Para activar tu cuenta, haz clic en el siguiente enlace:<br>
-                        <a href="' . $enlace_verificacion . '" style="color:blue;">Verificar mi cuenta</a></p>
+                        <p>Lamentamos que ya no formes parte de nuestra familia de clientes. Tal y como solicitaste tu cuenta ha sido eliminada con éxito.</p>
+                        <p>Pero si en algun momento deseas volver en el futuro, no dudes en registrarte nuevamente.</p>
                         <p>Saludos,<br>El equipo de Harvey\'s</p>
                         <p><img src="cid:logo_harveys" alt="Logo de Harvey\'s" style="width: 40px; height: 40px;"></p>
                     </body>
                 </html>
             ';
-            $mail->AltBody = 'Hola ' . $nombre . ",\n\nBienvenido a nuestra gran familia de Harvey's. Gracias por registarte en nustro club de clientes. Esperamos que disfrutes de nuestras ofertas exclusivas para los miembros del club.\nVerifica tu cuenta aquí: $enlace_verificacion\n\nSaludos de parte de,\nEl equipo de Harvey's";
+            $mail->AltBody = "Hola $nombre,\n\nTu cuenta en Harvey's ha sido eliminada. que ya no formes parte de nuestra familia de clientes.\nSi deseas volver en el futuro, regístrate nuevamente.\n\nSaludos,\nEl equipo de Harvey's";
 
             $mail->send();
             return true;
         } catch (Exception $e) {
-            error_log("Mailer Error: {$mail->ErrorInfo}");
+            error_log("Error al enviar correo de eliminación: {$mail->ErrorInfo}");
             return false;
         }
     }

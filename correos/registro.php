@@ -41,8 +41,9 @@
         $contraseniaHash = password_hash($contrasenia, PASSWORD_DEFAULT);
         try {
             
-            $stmt = $pdo->prepare("INSERT INTO clientes (nombre, apellido, email, contrasenia, telefono, direccion, ciudad, provincia, codigo_postal) VALUES (:nombre, :apellido, :email, :contrasenia, :telefono, :direccion, :ciudad, :provincia, :codigo_postal)");
-        
+            $token = bin2hex(random_bytes(32));
+            $stmt = $pdo->prepare("INSERT INTO clientes (nombre, apellido, email, contrasenia, telefono, direccion, ciudad, provincia, codigo_postal, verificacion_token) VALUES (:nombre, :apellido, :email, :contrasenia, :telefono, :direccion, :ciudad, :provincia, :codigo_postal, :token)");
+                    
             $stmt->execute([
                 ':nombre'       => $nombre,
                 ':apellido'     => $apellido,
@@ -52,9 +53,12 @@
                 ':direccion'    => $direccion,
                 ':ciudad'       => $ciudad,
                 ':provincia'    => $provincia,
-                ':codigo_postal'=> $codigo_postal
+                ':codigo_postal'=> $codigo_postal,
+                ':token'         => $token
             ]);
 
+            $baseUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'];
+            $enlace_verificacion = $baseUrl . '/Harvey-s/autenticacion/verificar.php?token=' . $token;
             
         } catch(PDOException $e) {
             echo "Error al registrar el usuario: " . $e->getMessage();
@@ -63,7 +67,7 @@
         
         require_once 'correo_bienvenida.php';
         
-        if (!enviarCorreoBienvenida($email, $nombre)) {
+        if (!enviarCorreoBienvenida($email, $nombre, $enlace_verificacion)) {
             error_log("Error al enviar el correo de bienvenida.");
         }
         

@@ -29,9 +29,17 @@
     <meta charset="UTF-8">
     <title>Mi Cuenta</title>
     <link rel="stylesheet" href="../elementos/css/css_clientes.css"> <!-- Ajusta la ruta -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="icon" href="../elementos/pics/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- Iconos de Font Awesome -->
+    <title>Harvey's | Cuenta</title>
 </head>
 <body>
+    <?php 
+        include '../layout/header_logged.php';
+        include '../divs/div_carrito.php';
+       include '../divs/div_secciones_logged.php';
+        include '../divs/div_empleados.php';
+    ?>
 
     <div class="perfil">
         <h2>Mis Datos</h2>
@@ -82,75 +90,20 @@
             <input type="text" name="codigo_postal" id="edit-codigo_postal" value="<?= htmlspecialchars($usuario['codigo_postal']) ?>">
 
             <button type="submit">Guardar cambios</button>
+            <button type="button" id="cancelar-edicion">Cancelar</button>
+
             <button type="button" id="eliminar-cuenta">Eliminar cuenta</button>
         </form>
     </div>
 
-    <script>
-    $(document).ready(function() {
-        $("#editar").on("click", function() {
-            $(".perfil").hide();
-            $(".editar-perfil").show();
-        });
-
-        $("#cerrar-sesion").on("click", function() {
-            window.location.href = "../autenticacion/logout.php";
-        });
-
-       $("#formEditar").on("submit", function(e) {
-            e.preventDefault();
-
-            const nombre = $("#edit-nombre").val();
-            const apellido = $("#edit-apellido").val();
-            const email = $("#edit-email").val();
-            const telefono = $("#edit-telefono").val();
-            const direccion = $("#edit-direccion").val();
-            const ciudad = $("#edit-ciudad").val();
-            const provincia = $("#edit-provincia").val();
-            const codigo_postal = $("#edit-codigo_postal").val();
-            const contrasenia = $("#edit-contrasenia").val();
-            const confirmarContrasenia = $("#confirmar-contrasenia").val();
-
-            if (contrasenia || confirmarContrasenia) {
-                if (contrasenia !== confirmarContrasenia) {
-                    alert("Las contraseñas no coinciden.");
-                    return;
-                }
-            }
-
-            $.ajax({
-                url: "../autenticacion/actualizar.php",
-                type: "POST",
-                data: { nombre, apellido, email, telefono, direccion, ciudad, provincia, codigo_postal, contrasenia },
-                success: function(response) {
-                    if (response.trim() === "success") {
-                        alert("Datos actualizados correctamente.");
-                        location.reload();
-                    } else {
-                        alert("Error: " + response);
-                    }
-                }
-            });
-        });
-
-        $("#eliminar-cuenta").on("click", function() {
-            if (confirm("¿Seguro que quieres eliminar tu cuenta? Esta acción no se puede deshacer.")) {
-                $.ajax({
-                    url: "../autenticacion/eliminar.php",
-                    type: "POST",
-                    success: function(response) {
-                        if (response.trim() === "success") {
-                            alert("Cuenta eliminada correctamente.");
-                            window.location.href = "../layout/home.php";
-                        } else {
-                            alert("Error: " + response);
-                        }
-                    }
-                });
-            }
-        });
-    });
-    </script>
+    <?php
+        include '../layout/footer.php';
+    ?>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="/Harvey-s/elementos/scripts/scripts_home.js"></script>
+    <script src="/Harvey-s/elementos/scripts/script_cuenta_usuario.js"></script>
+    <script src="/Harvey-s/elementos/busqueda/script_buscar_categoria_logged.js"></script>
 
 </body>
 </html>

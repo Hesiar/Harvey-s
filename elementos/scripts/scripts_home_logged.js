@@ -1,7 +1,14 @@
 $(document).ready(function(){
+    $(".campo-busqueda").val("");
+    $(".campo-busqueda").on("keydown", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault(); 
+        }
+    });
+    
     $('.btn-login').on('click', function(e){
         e.preventDefault();
-        window.location.href = '../secciones/cuenta.php';
+        window.location.href = '/Harvey-s/secciones/cuenta.php';
     });
     $('.btn-carrito').on('click', function(e){
         e.preventDefault();

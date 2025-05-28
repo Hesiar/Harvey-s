@@ -10,10 +10,11 @@
         </button>
 
         <form id="busqueda" action="#" method="get">
-            <input class="campo-busqueda" type="text" placeholder="Buscar en Harvey's" name="search" required>
+            <input class="campo-busqueda" type="text" placeholder="Buscar en Harvey's" name="search" required autocomplete="off">
             <button class="btn-busqueda" type="submit">
                 <i class="fas fa-search"></i>
             </button>
+            <div id="sugerencias" class="lista-sugerencias"></div>
         </form>
 
         <form action="/Harvey-s/secciones/faq.php">

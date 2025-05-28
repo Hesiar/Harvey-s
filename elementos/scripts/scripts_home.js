@@ -1,4 +1,11 @@
 $(document).ready(function(){
+    $(".campo-busqueda").val("");
+    $(".campo-busqueda").on("keydown", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault(); 
+        }
+    });
+    
     $('.btn-login').on('click', function(e){
         e.preventDefault();
         $('.divLogin').animate({right: '1rem'}, 400);

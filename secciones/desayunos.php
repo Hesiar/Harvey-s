@@ -18,15 +18,16 @@
         include '../divs/div_empleados.php';
     ?>
     <div class="productos-container">
-        <script src="\Harvey-s\elementos\scripts\script_desayunos_dulces_frutos_secos.js"></script>
+        <script src="/Harvey-s/elementos/scripts/script_desayunos_dulces_frutos_secos.js"></script>
     </div>
     <?php
         include '../layout/footer.php';
     ?>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-    <script src="\Harvey-s\elementos\scripts\scripts_home.js"></script>
+    <script src="/Harvey-s/elementos/scripts/scripts_home.js"></script>
     <script src="../elementos/scripts/switch_secciones.js"></script>
+    <script src="/Harvey-s/elementos/busqueda/script_buscar_categoria.js"></script>
 
 </body>
 </html>

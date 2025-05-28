@@ -73,7 +73,7 @@
                         if (response.trim() === "success") {
                             alert("Si usted tuviese una cuenta registrada con nosotros, revise su correo. No olvide de revisar la carpeta de spam.");
                         } else {
-                            alert("Error en el envío: " + response);
+                            alert("Error en el envío del correo.");
                         }
                     },
                     error: function() {

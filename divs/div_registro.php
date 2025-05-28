@@ -14,8 +14,11 @@
         <input type="email" name="email" placeholder="Correo">
         
         <label for="contrasenia">Contraseña:</label>
-        <input type="password" name="contrasenia" placeholder="Contraseña">
-        
+        <input type="password" id="contrasenia" name="contrasenia" placeholder="Contraseña" autocomplete="off" >
+
+        <label for="confirmar_contrasenia">Confirmar Contraseña:</label>
+        <input type="password" id="confirmar_contrasenia" name="confirmar_contrasenia" placeholder="Repite tu contraseña" autocomplete="off">
+
         <label for="telefono">Teléfono:</label>
         <input type="text" name="telefono" placeholder="Teléfono">
 
@@ -40,31 +43,50 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 
 <script>
-$(document).ready(function(){
-    $('.back-button-registro').on('click', function(){
-        $('.divRegistro').animate({ right: '-320px' }, 400, function(){
-            $("#formRegistro")[0].reset();
-            $("#registro-response").empty();
+    $(document).ready(function(){
+        $('.back-button-registro').on('click', function(){
+            $('.divRegistro').animate({ right: '-320px' }, 400, function(){
+                $("#formRegistro")[0].reset();
+                $("#registro-response").empty();
+            });
         });
-    });
 
-    $("#formRegistro").on('submit', function(e){
-        e.preventDefault();
-        $.ajax({
-            url: $(this).attr("action"),
-            type: $(this).attr("method"),
-            data: $(this).serialize(),
-            success: function(response){
-                $("#registro-response").html(response);
-                if (response.includes("Este correo ya está registrado")) {
+        $("#formRegistro").on('submit', function(e){
+            e.preventDefault();
+
+            let contrasenia = $("#contrasenia").val().trim();
+            let confirmarContrasenia = $("#confirmar_contrasenia").val().trim();
+
+            if (contrasenia !== confirmarContrasenia) {
+                alert("Las contraseñas no coinciden. Verifica e inténtalo de nuevo.");
+                return;
+            }
+
+            $.ajax({
+                url: $(this).attr("action"),
+                type: $(this).attr("method"),
+                data: $(this).serialize(),
+                success: function(response){
+                    response = response.trim();
+
+                    alert("Registro completado correctamente. Se ha enviado un correo a la dirección proporcionada. No olvides verificar (revisa también la carpeta de spam).");
+
+                    $("#formRegistro")[0].reset();
+
+                    $('.divRegistro').animate({ right: '-320px' }, 400, function(){
+                        $("#registro-response").empty();
+
+                        $('.divLogin').animate({ right: '-320px' }, 400, function(){
+                            $("#formLogin")[0].reset();
+                            $("#login-response").empty();
+                        });
+                    });
+                },
+                error: function(xhr, status, error){
+                    alert("Ocurrió un error. Inténtalo de nuevo.");
                     $("#formRegistro")[0].reset();
                 }
-            },
-            error: function(){
-                $("#registro-response").html("Ocurrió un error. Inténtalo de nuevo.");
-                $("#formRegistro")[0].reset();
-            }
+            });
         });
     });
-});
 </script>
