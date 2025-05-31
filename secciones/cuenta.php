@@ -35,9 +35,9 @@
 </head>
 <body>
     <?php 
-        include '../layout/header_logged.php';
+        include '../layout/header.php';
         include '../divs/div_carrito.php';
-       include '../divs/div_secciones_logged.php';
+       include '../divs/div_secciones.php';
         include '../divs/div_empleados.php';
     ?>
 
@@ -103,7 +103,7 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     <script src="/Harvey-s/elementos/scripts/scripts_home.js"></script>
     <script src="/Harvey-s/elementos/scripts/script_cuenta_usuario.js"></script>
-    <script src="/Harvey-s/elementos/busqueda/script_buscar_categoria_logged.js"></script>
+    <script src="/Harvey-s/elementos/busqueda/script_buscar_categoria.js"></script>
 
 </body>
 </html>

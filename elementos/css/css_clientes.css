@@ -329,5 +329,25 @@
 }
 
 .producto img {
-    max-width: 100px;
+    width: 200px;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
 }
+
+.custom-number::-webkit-outer-spin-button,
+.custom-number::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+.custom-number {
+  -moz-appearance: textfield;
+  text-align: center;
+  appearance: textfield;
+  width: 40px; 
+  height: 30px; 
+  font-size: 16px; 
+  padding: 0;
+}
+

@@ -21,75 +21,133 @@ fetch('../secciones/conexiones_bd_secciones/conexion_bebidas.php')
   .catch(error => console.error('Error al cargar los productos:', error));
 
 function agregarAlCarrito(nombre, precio, imagen) {
-  console.log("Agregando al carrito:", nombre, precio, imagen); // Depuración
-  let productoExistente = carrito.find(prod => prod.nombre === nombre);
-
-  if (productoExistente) {
-    productoExistente.cantidad++;
-    document.getElementById(`cantidad-${nombre}`).value = productoExistente.cantidad;
-  } else {
-    carrito.push({ nombre, precio, cantidad: 1, imagen });
+  console.log("Agregando al carrito:", nombre, precio, imagen);
+  fetch('../secciones/carrito/agregar_carrito.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ nombre: nombre, precio: precio, cantidad: 1, imagen: imagen })
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log("Producto agregado:", data);
+    obtenerCarrito();
     let productoDiv = document.getElementById(`producto-${nombre}`);
     productoDiv.innerHTML = `
       <h2>${nombre}</h2>
-      <p>Precio: ${precio}€</p>
+      <p>Precio: ${precio.toFixed(2)}€</p>
       <img src="${imagen}" alt="${nombre}">
       <div class="control-cantidad">
-        <button onclick="eliminarDelCarrito('${nombre}', ${precio}, '${imagen}')" class="btn-eliminar">🗑️</button>
-        <input type="number" value="1" id="cantidad-${nombre}" min="0" onblur="actualizarCantidad('${nombre}', ${precio}, '${imagen}')">
-        <button onclick="incrementarCantidad('${nombre}')" class="btn-aumentar">➕</button>
+        <button onclick="eliminarDelCarrito('${nombre}', ${precio}, '${imagen}')" class="btn-eliminar">
+          <i class="fas fa-trash"></i>
+        </button>
+        <button onclick="decrementarCantidad('${nombre}', ${precio}, '${imagen}')" class="btn-disminuir">
+          <i class="fas fa-minus"></i>
+        </button>
+        <input type="number" value="1" id="cantidad-${nombre}" class="custom-number" min="1" 
+              onblur="actualizarCantidad('${nombre}', ${precio}, '${imagen}')">
+        <button onclick="incrementarCantidad('${nombre}', ${precio}, '${imagen}')" class="btn-aumentar">
+          <i class="fas fa-plus"></i>
+        </button>
       </div>
     `;
-  }
-  actualizarCarrito();
+  })
+  .catch(error => console.error('Error al agregar al carrito:', error));
 }
 
-function incrementarCantidad(nombre) {
-  let producto = carrito.find(prod => prod.nombre === nombre);
-  if (producto) {
-    producto.cantidad++;
-    document.getElementById(`cantidad-${nombre}`).value = producto.cantidad;
-  }
-  actualizarCarrito();
-}
-
-function eliminarDelCarrito(nombre, precio, imagen) {
-  carrito = carrito.filter(prod => prod.nombre !== nombre);
-  let productoDiv = document.getElementById(`producto-${nombre}`);
-  productoDiv.innerHTML = `
-    <h2>${nombre}</h2>
-    <p>Precio: ${precio}€</p>
-    <img src="${imagen}" alt="${nombre}">
-    <button id="btn-${nombre}" onclick="agregarAlCarrito('${nombre}', ${precio}, '${imagen}')">
-      Añadir al carrito
-    </button>
-  `;
-  actualizarCarrito();
+function incrementarCantidad(nombre, precio, imagen) {
+  let cantidadInput = document.getElementById(`cantidad-${nombre}`);
+  let currentCantidad = parseInt(cantidadInput.value) || 1;
+  let newCantidad = currentCantidad + 1;
+  fetch('../secciones/carrito/actualizar_carrito.php', {
+       method: 'POST',
+       headers: { 'Content-Type': 'application/json' },
+       body: JSON.stringify({ nombre: nombre, cantidad: newCantidad })
+  })
+  .then(response => response.json())
+  .then(data => {
+         console.log("Cantidad incrementada:", data);
+         cantidadInput.value = newCantidad;
+         obtenerCarrito();
+  })
+  .catch(error => console.error('Error al incrementar la cantidad:', error));
 }
 
 function actualizarCantidad(nombre, precio, imagen) {
   let nuevaCantidad = parseInt(document.getElementById(`cantidad-${nombre}`).value);
-  let producto = carrito.find(prod => prod.nombre === nombre);
-  if (producto) {
-    if (nuevaCantidad > 0) {
-      producto.cantidad = nuevaCantidad;
-    } else {
-      eliminarDelCarrito(nombre, precio, imagen);
-    }
+  if (nuevaCantidad > 0) {
+    fetch('../secciones/carrito/actualizar_carrito.php', {
+       method: 'POST',
+       headers: { 'Content-Type': 'application/json' },
+       body: JSON.stringify({ nombre: nombre, cantidad: nuevaCantidad })
+    })
+    .then(response => response.json())
+    .then(data => {
+       console.log("Cantidad actualizada:", data);
+       obtenerCarrito();
+    })
+    .catch(error => console.error('Error al actualizar la cantidad:', error));
+  } else {
+    eliminarDelCarrito(nombre, precio, imagen);
   }
-  actualizarCarrito();
 }
 
-function actualizarCarrito() {
-  let totalProductos = carrito.reduce((acc, prod) => acc + prod.cantidad, 0);
-  let totalPrecio = carrito.reduce((acc, prod) => acc + prod.precio * prod.cantidad, 0);
+function decrementarCantidad(nombre, precio, imagen) {
+  let input = document.getElementById(`cantidad-${nombre}`);
+  let current = parseInt(input.value) || 1;
   
-  let totalProductosElem = document.getElementById("total-productos");
-  let totalPrecioElem = document.getElementById("total-precio");
-  if(totalProductosElem) {
-    totalProductosElem.textContent = totalProductos;
-  }
-  if(totalPrecioElem) {
-    totalPrecioElem.textContent = totalPrecio.toFixed(2) + "€";
+  if (current > 1) {
+    let newQuantity = current - 1;
+    fetch('../secciones/carrito/actualizar_carrito.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre: nombre, cantidad: newQuantity })
+    })
+    .then(response => response.json())
+    .then(data => {
+        input.value = newQuantity;
+        obtenerCarrito(); 
+    })
+    .catch(error => console.error('Error al decrementar la cantidad:', error));
   }
 }
+
+
+function eliminarDelCarrito(nombre, precio, imagen) {
+  fetch('../secciones/carrito/eliminar_carrito.php', {
+       method: 'POST',
+       headers: { 'Content-Type': 'application/json' },
+       body: JSON.stringify({ nombre: nombre })
+  })
+  .then(response => response.json())
+  .then(data => {
+      console.log("Producto eliminado:", data);
+      let productoDiv = document.getElementById(`producto-${nombre}`);
+      productoDiv.innerHTML = `
+          <h2>${nombre}</h2>
+          <p>Precio: ${precio.toFixed(2)}€</p>
+          <img src="${imagen}" alt="${nombre}">
+          <button id="btn-${nombre}" onclick="agregarAlCarrito('${nombre}', ${precio}, '${imagen}')">
+              Añadir al carrito
+          </button>
+      `;
+      obtenerCarrito();
+  })
+  .catch(error => console.error('Error al eliminar el producto:', error));
+}
+
+function obtenerCarrito() {
+  fetch('../secciones/carrito/obtener_carrito.php')
+    .then(response => response.json())
+    .then(data => {
+        console.log("Carrito obtenido:", data);
+        let totalProductos = data.reduce((acc, prod) => acc + prod.cantidad, 0);
+        let totalPrecio = data.reduce((acc, prod) => acc + prod.cantidad * prod.precio, 0);
+        document.getElementById("total-productos").textContent = totalProductos;
+        document.getElementById("total-precio").textContent = totalPrecio.toFixed(2) + "€";
+    })
+    .catch(error => console.error("Error al obtener el carrito:", error));
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+   obtenerCarrito();
+});

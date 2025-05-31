@@ -54,8 +54,22 @@
         $("#formRegistro").on('submit', function(e){
             e.preventDefault();
 
+            let nombre = $("input[name='nombre']").val().trim();
+            let apellido = $("input[name='apellido']").val().trim();
+            let email = $("input[name='email']").val().trim();
             let contrasenia = $("#contrasenia").val().trim();
             let confirmarContrasenia = $("#confirmar_contrasenia").val().trim();
+            let telefono = $("input[name='telefono']").val().trim();
+            let direccion = $("input[name='direccion']").val().trim();
+            let ciudad = $("input[name='ciudad']").val().trim();
+            let provincia = $("input[name='provincia']").val().trim();
+            let codigo_postal = $("input[name='codigo_postal']").val().trim();
+
+             if (!nombre || !apellido || !email || !contrasenia || !confirmarContrasenia || 
+                !telefono || !direccion || !ciudad || !provincia || !codigo_postal) {
+                alert("Todos los campos son obligatorios. Por favor, completa el formulario.");
+                return;
+            }
 
             if (contrasenia !== confirmarContrasenia) {
                 alert("Las contraseñas no coinciden. Verifica e inténtalo de nuevo.");

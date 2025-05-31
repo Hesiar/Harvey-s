@@ -2,6 +2,11 @@
 
     session_start();
 
+    if (isset($_POST['checkAuth'])) {
+        echo isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] ? "true" : "false";
+        exit;
+    }
+
     $host = 'localhost';
     $dbname = 'harveys_DB';
     $dbuser = 'root';        
@@ -24,6 +29,7 @@
         if ($usuario) {
             $_SESSION['nombre'] = $usuario['nombre'];
             $_SESSION['email'] = $usuario['email'];
+            $_SESSION['loggedIn'] = true;
         }
     }
 
@@ -47,6 +53,7 @@
             $_SESSION['usuario_id'] = $cliente['id'];
             $_SESSION['nombre'] = $cliente['nombre'];
             $_SESSION['email'] = $cliente['email'];
+            $_SESSION['loggedIn'] = true;
 
             if ($recordar) {
                 setcookie("usuario_id", $cliente['id'], time() + (86400 * 30), "/"); 
@@ -55,6 +62,7 @@
             echo "success";
             exit;
         } else {
+            $_SESSION['loggedIn'] = false;
             echo "Usuario o contraseña incorrectos.";
         }
     }

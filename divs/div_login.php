@@ -81,7 +81,7 @@
                     }
                     });
             } else {
-                alert("Si usted tuviese una cuenta registrada con nosotros, revise su correo. No olvide de revisar la carpeta de spam.");
+                alert("No ha introducido una dirección de correo.");
             }
         });
 

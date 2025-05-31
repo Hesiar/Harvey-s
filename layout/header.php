@@ -1,3 +1,6 @@
+<?php
+    $current_page = basename($_SERVER['PHP_SELF']);
+?>
 <header>     
     <div>
         <a href="/Harvey-s/layout/home.php">
@@ -29,12 +32,18 @@
             </button>
         </form>
 
+        <?php 
+            if ($current_page !== 'detalle_compra.php') : 
+        ?>
         <form action="">
             <button class="btn-carrito" type="submit">
                 <i class="fas fa-shopping-cart"></i>
                 Carrito
             </button>
         </form>
+        <?php 
+            endif; 
+        ?>
     </div>
 
     <hr>
