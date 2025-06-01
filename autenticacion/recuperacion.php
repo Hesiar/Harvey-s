@@ -44,11 +44,11 @@
                 echo "success";
                 exit;
             } else {
-                echo "Error al enviar el correo de recuperación.";
+                echo "En caso de tener una cuenta con nosotros, recibirá un correo. No olvide revisar la carpeta de spam.";
                 exit;
             }
         } else {
-            echo "No se encontró ningún usuario con ese correo.";
+            echo "En caso de tener una cuenta con nosotros, recibirá un correo. No olvide revisar la carpeta de spam.";
             exit;
         }
     }

@@ -48,31 +48,121 @@
             $('.divRegistro').animate({ right: '-320px' }, 400, function(){
                 $("#formRegistro")[0].reset();
                 $("#registro-response").empty();
+                $("#formRegistro input").each(function() {
+                    limpiarError($(this));
+                });
+                $(".error-message").remove();
+                 $("button[type='submit']").prop("disabled", false);
             });
         });
 
-        $("#formRegistro").on('submit', function(e){
-            e.preventDefault();
+        function limpiarError(input) {
+            input.next(".error-message").remove();
+        }
 
-            let nombre = $("input[name='nombre']").val().trim();
-            let apellido = $("input[name='apellido']").val().trim();
-            let email = $("input[name='email']").val().trim();
+        function validarCampoVacio(input, mensajeError) {
+            limpiarError(input);
+            if (input.val().trim() === "") {
+                input.after("<p class='error-message' style='color: red; font-weight: bold;'>" + mensajeError + "</p>");
+                return false;
+            }
+            return true;
+        }
+
+        function validarContrasenia() {
+            let contrasenia = $("#contrasenia").val().trim();
+            let regexContrasenia = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/;
+
+            limpiarError($("#contrasenia"));
+
+            if (!regexContrasenia.test(contrasenia)) {
+                $("#contrasenia").after("<p class='error-message' style='color: red; font-weight: bold;'>Debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.</p>");
+                return false;
+            }
+            return true;
+        }
+
+        function validarConfirmacion() {
             let contrasenia = $("#contrasenia").val().trim();
             let confirmarContrasenia = $("#confirmar_contrasenia").val().trim();
-            let telefono = $("input[name='telefono']").val().trim();
-            let direccion = $("input[name='direccion']").val().trim();
-            let ciudad = $("input[name='ciudad']").val().trim();
-            let provincia = $("input[name='provincia']").val().trim();
-            let codigo_postal = $("input[name='codigo_postal']").val().trim();
 
-             if (!nombre || !apellido || !email || !contrasenia || !confirmarContrasenia || 
-                !telefono || !direccion || !ciudad || !provincia || !codigo_postal) {
-                alert("Todos los campos son obligatorios. Por favor, completa el formulario.");
-                return;
-            }
+            limpiarError($("#confirmar_contrasenia"));
 
             if (contrasenia !== confirmarContrasenia) {
-                alert("Las contraseñas no coinciden. Verifica e inténtalo de nuevo.");
+                $("#confirmar_contrasenia").after("<p class='error-message' style='color: red; font-weight: bold;'>Las contraseñas no coinciden.</p>");
+                return false;
+            }
+            return true;
+        }
+
+        function validarEmail() {
+            let email = $("input[name='email']").val().trim();
+            let regexCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            limpiarError($("input[name='email']"));
+
+            if (!regexCorreo.test(email)) {
+                $("input[name='email']").after("<p class='error-message' style='color: red; font-weight: bold;'>Introduce un correo válido.</p>");
+                return false;
+            }
+            return true;
+        }
+
+        function validarTelefono() {
+            let telefono = $("input[name='telefono']").val().trim();
+            let regexTelefono = /^\+?[0-9]{1,3}?[-. ]?\(?\d{1,4}\)?[-. ]?\d{1,4}[-. ]?\d{1,9}$/;
+
+            limpiarError($("input[name='telefono']"));
+
+            if (!regexTelefono.test(telefono)) {
+                $("input[name='telefono']").after("<p class='error-message' style='color: red; font-weight: bold;'>Introduce un número de teléfono válido.</p>");
+                return false;
+            }
+            return true;
+        }
+
+        function validarCodigoPostal() {
+            let codigoPostal = $("input[name='codigo_postal']").val().trim();
+            let regexCodigoPostal = /^[0-9]{5}$/;
+
+            limpiarError($("input[name='codigo_postal']"));
+
+            if (!regexCodigoPostal.test(codigoPostal)) {
+                $("input[name='codigo_postal']").after("<p class='error-message' style='color: red; font-weight: bold;'>Introduce un código postal válido (5 dígitos).</p>");
+                return false;
+            }
+            return true;
+        }
+
+        function validarFormulario() {
+            let esValido = true;
+
+            esValido &= validarCampoVacio($("input[name='nombre']"), "Debes ingresar tu nombre.");
+            esValido &= validarCampoVacio($("input[name='apellido']"), "Debes ingresar tu apellido.");
+            esValido &= validarCampoVacio($("input[name='direccion']"), "Debes ingresar tu dirección.");
+            esValido &= validarCampoVacio($("input[name='ciudad']"), "Debes ingresar tu ciudad.");
+            esValido &= validarCampoVacio($("input[name='provincia']"), "Debes ingresar tu provincia.");
+
+            esValido &= validarContrasenia();
+            esValido &= validarConfirmacion();
+            esValido &= validarEmail();
+            esValido &= validarTelefono();
+            esValido &= validarCodigoPostal();
+
+            return esValido;
+        }
+
+        // Activar/desactivar el botón dependiendo de la validación
+        $("#formRegistro input").on("input", function(){
+            let esValido = validarFormulario();
+            $("button[type='submit']").prop("disabled", !esValido);
+        });
+
+        $("#formRegistro").on("submit", function(e){
+            e.preventDefault();
+            $(".error-message").remove();
+
+            if (!validarFormulario()) {
                 return;
             }
 
@@ -81,26 +171,22 @@
                 type: $(this).attr("method"),
                 data: $(this).serialize(),
                 success: function(response){
-                    response = response.trim();
-
-                    alert("Registro completado correctamente. Se ha enviado un correo a la dirección proporcionada. No olvides verificar (revisa también la carpeta de spam).");
-
+                    alert("Registro completado correctamente. Se ha enviado un correo a la dirección proporcionada. No olvides revisar la carpeta de spam.");
                     $("#formRegistro")[0].reset();
-
                     $('.divRegistro').animate({ right: '-320px' }, 400, function(){
                         $("#registro-response").empty();
-
-                        $('.divLogin').animate({ right: '-320px' }, 400, function(){
-                            $("#formLogin")[0].reset();
-                            $("#login-response").empty();
-                        });
+                    });
+                    $('.divLogin').animate({right: '-320px'}, 400, function(){
+                        $("#formLogin")[0].reset();
+                        $("#login-response").empty();
                     });
                 },
-                error: function(xhr, status, error){
-                    alert("Ocurrió un error. Inténtalo de nuevo.");
-                    $("#formRegistro")[0].reset();
+                error: function(){
+                    $("#registro-response").html("<p style='color: red; font-weight: bold;'>Ocurrió un error al procesar tu registro.</p>");
                 }
             });
         });
     });
+
+
 </script>

@@ -63,6 +63,10 @@
             e.preventDefault();
             
             var correo = prompt("Introduce tu correo para la recuperación de contraseña:");
+
+            if (correo === null) {
+                return;
+            }
             
             if (correo && correo.trim() !== "") {
                 $.ajax({
@@ -71,13 +75,13 @@
                     data: { correo: correo },
                     success: function(response) {
                         if (response.trim() === "success") {
-                            alert("Si usted tuviese una cuenta registrada con nosotros, revise su correo. No olvide de revisar la carpeta de spam.");
+                            alert("En caso de tener una cuenta con nosotros, recibirá un correo. No olvide revisar la carpeta de spam.");
                         } else {
-                            alert("Error en el envío del correo.");
+                            alert("En caso de tener una cuenta con nosotros, recibirá un correo. No olvide revisar la carpeta de spam.");
                         }
                     },
                     error: function() {
-                        alert("Ocurrió un error al enviar el correo.");
+                        alert("En caso de tener una cuenta con nosotros, recibirá un correo. No olvide revisar la carpeta de spam.");
                     }
                     });
             } else {

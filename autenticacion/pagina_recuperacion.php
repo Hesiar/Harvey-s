@@ -52,27 +52,45 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-    $(document).ready(function(){
-        $("#formRecuperacion").on('submit', function(e) {
-            e.preventDefault(); 
-            $.ajax({
-                url: $(this).attr("action"),
-                type: $(this).attr("method"),
-                data: $(this).serialize(),
-                dataType: "json", 
-                success: function(response) {
-                    if (response.status === "error") {
-                        alert(response.mensaje);
-                    } else {
-                        alert(response.mensaje);
-                    }
-                },
-                error: function() {
-                    alert("Ocurrió un error inesperado en el servidor.");
+        $(document).ready(function(){
+            $("#formRecuperacion").on('submit', function(e) {
+                e.preventDefault(); 
+
+                let nuevaContrasenia = $("input[name='nueva_contrasenia']").val().trim();
+                let confirmarContrasenia = $("input[name='confirmar_contrasenia']").val().trim();
+
+                let regexContrasenia = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/;
+
+                $("#formRecuperacion").find(".error-message").remove();
+
+                if (!regexContrasenia.test(nuevaContrasenia)) {
+                    $("input[name='nueva_contrasenia']").after("<p class='error-message' style='color: red; font-weight: bold;'>La contraseña debe tener al menos 8 caracteres, incluir una mayúscula, una minúscula, un número y un carácter especial.</p>");
+                    return;
                 }
+
+                if (nuevaContrasenia !== confirmarContrasenia) {
+                    $("input[name='confirmar_contrasenia']").after("<p class='error-message' style='color: red; font-weight: bold;'>Las contraseñas no coinciden. Verifica e inténtalo de nuevo.</p>");
+                    return;
+                }
+
+                $.ajax({
+                    url: $(this).attr("action"),
+                    type: $(this).attr("method"),
+                    data: $(this).serialize(),
+                    dataType: "json", 
+                    success: function(response) {
+                        if (response.status === "error") {
+                            alert(response.mensaje);
+                        } else {
+                            alert(response.mensaje);
+                        }
+                    },
+                    error: function() {
+                        alert("Ocurrió un error inesperado en el servidor.");
+                    }
+                });
             });
         });
-    });
     </script>
 </body>
 </html>
