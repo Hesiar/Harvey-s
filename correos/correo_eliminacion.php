@@ -40,14 +40,14 @@
                             <h1 style="margin: 0; color: white;">Tu cuenta en Harvey\'s ha sido eliminada</h1>
                         </div>
                         <p><strong>Hola ' . htmlspecialchars($nombre) . ',</strong></p>
-                        <p>Lamentamos que ya no formes parte de nuestra familia de clientes. Tal y como solicitaste tu cuenta ha sido eliminada con éxito.</p>
+                        <p>Lamentamos que ya no formes parte de nuestra gran familia. Tal y como solicitaste tu cuenta ha sido eliminada con éxito.</p>
                         <p>Pero si en algun momento deseas volver en el futuro, no dudes en registrarte nuevamente.</p>
                         <p>Saludos,<br>El equipo de Harvey\'s</p>
                         <p><img src="cid:logo_harveys" alt="Logo de Harvey\'s" style="width: 40px; height: 40px;"></p>
                     </body>
                 </html>
             ';
-            $mail->AltBody = "Hola $nombre,\n\nTu cuenta en Harvey's ha sido eliminada. que ya no formes parte de nuestra familia de clientes.\nSi deseas volver en el futuro, regístrate nuevamente.\n\nSaludos,\nEl equipo de Harvey's";
+            $mail->AltBody = "Hola $nombre,\n\nTu cuenta en Harvey's ha sido eliminada. que ya no formes parte de nuestra gran familia.\nSi deseas volver en el futuro, regístrate nuevamente.\n\nSaludos,\nEl equipo de Harvey's";
 
             $mail->send();
             return true;

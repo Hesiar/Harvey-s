@@ -31,7 +31,7 @@
                 }
             });
         });
-        
+
         $("#formLogin").on('submit', function(e) {
             e.preventDefault();
 
@@ -45,11 +45,29 @@
                             window.location.href = "../secciones/cuenta.php";
                         });
                     } else {
-                        $("#login-response").html(response);
+                        Swal.fire({
+                            title: 'Error de inicio de sesión',
+                            text: response,
+                            icon: 'error',
+                            iconColor: '#de301d',
+                            confirmButtonText: 'Intentar de nuevo',
+                            confirmButtonColor: '#155724',
+                            allowOutsideClick: false,
+                            width: '400px'
+                        });
                     }
                 },
                 error: function() {
-                    $("#login-response").html("Ocurrió un error. Inténtalo de nuevo.");
+                    Swal.fire({
+                        title: 'Error en el servidor',
+                        text: 'Ocurrió un problema inesperado. Inténtalo más tarde.',
+                        icon: 'error',
+                        iconColor: '#de301d',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#155724',
+                        allowOutsideClick: false,
+                        width: '400px'
+                    });
                 }
             });
         });
@@ -62,32 +80,57 @@
         $('#btn-recuperacion').on('click', function(e) {
             e.preventDefault();
             
-            var correo = prompt("Introduce tu correo para la recuperación de contraseña:");
-
-            if (correo === null) {
-                return;
-            }
-            
-            if (correo && correo.trim() !== "") {
-                $.ajax({
-                    url: "../correos/correo_recuperacion.php",
-                    type: "POST",
-                    data: { correo: correo },
-                    success: function(response) {
-                        if (response.trim() === "success") {
-                            alert("En caso de tener una cuenta con nosotros, recibirá un correo. No olvide revisar la carpeta de spam.");
-                        } else {
-                            alert("En caso de tener una cuenta con nosotros, recibirá un correo. No olvide revisar la carpeta de spam.");
-                        }
-                    },
-                    error: function() {
-                        alert("En caso de tener una cuenta con nosotros, recibirá un correo. No olvide revisar la carpeta de spam.");
+            Swal.fire({
+                title: 'Recuperación de contraseña',
+                input: 'email',
+                inputPlaceholder: 'Introduce tu correo',
+                showCancelButton: true,
+                confirmButtonText: 'Enviar correo',
+                confirmButtonColor: '#155724',
+                cancelButtonText: 'Cancelar',
+                cancelButtonColor: '#de301d',
+                allowOutsideClick: false,
+                width: '400px',
+                inputValidator: (value) => {
+                    if (!value.trim()) {
+                        return 'Debes ingresar un correo';
                     }
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let correo = result.value;
+                    
+                    $.ajax({
+                        url: "../correos/correo_recuperacion.php",
+                        type: "POST",
+                        data: { correo: correo },
+                        success: function(response) {
+                            Swal.fire({
+                                title: 'Petición recibida',
+                                text: 'Si tienes una cuenta con nosotros, recibirás un email. No olvides revisar la carpeta de spam.',
+                                icon: 'success',
+                                iconColor: '#155724',
+                                confirmButtonText: 'OK',
+                                confirmButtonColor: '#155724',
+                                allowOutsideClick: false,
+                                width: '400px'
+                            });
+                        },
+                        error: function() {
+                            Swal.fire({
+                                title: 'Error en el servidor',
+                                text: 'Ocurrió un error inesperado. Inténtalo más tarde.',
+                                icon: 'error',
+                                iconColor: '#de301d',
+                                confirmButtonText: 'OK',
+                                confirmButtonColor: '#155724',
+                                allowOutsideClick: false,
+                                width: '400px'
+                            });
+                        }
                     });
-            } else {
-                alert("No ha introducido una dirección de correo.");
-            }
+                }
+            });
         });
-
     });
 </script>

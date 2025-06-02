@@ -152,7 +152,6 @@
             return esValido;
         }
 
-        // Activar/desactivar el botón dependiendo de la validación
         $("#formRegistro input").on("input", function(){
             let esValido = validarFormulario();
             $("button[type='submit']").prop("disabled", !esValido);
@@ -167,24 +166,44 @@
             }
 
             $.ajax({
-                url: $(this).attr("action"),
-                type: $(this).attr("method"),
-                data: $(this).serialize(),
-                success: function(response){
-                    alert("Registro completado correctamente. Se ha enviado un correo a la dirección proporcionada. No olvides revisar la carpeta de spam.");
-                    $("#formRegistro")[0].reset();
-                    $('.divRegistro').animate({ right: '-320px' }, 400, function(){
-                        $("#registro-response").empty();
-                    });
-                    $('.divLogin').animate({right: '-320px'}, 400, function(){
-                        $("#formLogin")[0].reset();
-                        $("#login-response").empty();
-                    });
-                },
-                error: function(){
-                    $("#registro-response").html("<p style='color: red; font-weight: bold;'>Ocurrió un error al procesar tu registro.</p>");
-                }
+    url: $(this).attr("action"),
+    type: $(this).attr("method"),
+    data: $(this).serialize(),
+    success: function(response){
+        Swal.fire({
+            title: '¡Registro completado!',
+            text: 'Se ha enviado un correo a la dirección proporcionada. No olvides revisar la carpeta de spam.',
+            icon: 'success',
+            iconColor: '#155724',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#155724',
+            allowOutsideClick: false,
+            width: '400px'
+        }).then(() => {
+            $("#formRegistro")[0].reset();
+            $('.divRegistro').animate({ right: '-320px' }, 400, function(){
+                $("#registro-response").empty();
             });
+            $('.divLogin').animate({right: '-320px'}, 400, function(){
+                $("#formLogin")[0].reset();
+                $("#login-response").empty();
+            });
+        });
+    },
+    error: function(){
+        Swal.fire({
+            title: 'Error en el registro',
+            text: 'Ocurrió un error al procesar tu registro.',
+            icon: 'error',
+            iconColor: '#de301d',
+            confirmButtonText: 'Intentar de nuevo',
+            confirmButtonColor: '#155724',
+            allowOutsideClick: false,
+            width: '400px'
+        });
+    }
+});
+
         });
     });
 

@@ -1,5 +1,6 @@
 <?php
     session_start();
+    session_regenerate_id();
 
     $host   = 'localhost';
     $dbname = 'harveys_DB';
@@ -28,7 +29,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Mi Cuenta</title>
-    <link rel="stylesheet" href="../elementos/css/css_clientes.css"> <!-- Ajusta la ruta -->
+    <link rel="stylesheet" href="../elementos/css/css_clientes.css">
     <link rel="icon" href="../elementos/pics/icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- Iconos de Font Awesome -->
     <title>Harvey's | Cuenta</title>
@@ -37,7 +38,7 @@
     <?php 
         include '../layout/header.php';
         include '../divs/div_carrito.php';
-       include '../divs/div_secciones.php';
+        include '../divs/div_secciones.php';
         include '../divs/div_empleados.php';
     ?>
 

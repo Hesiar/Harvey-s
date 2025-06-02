@@ -88,7 +88,7 @@
 
         $response = [
             "status"  => "success",
-            "mensaje" => "Contraseña actualizada exitosamente. Ya puedes cerrar esta ventana."
+            "mensaje" => "Contraseña actualizada exitosamente."
         ];
         header('Content-Type: application/json');
         echo json_encode($response);
