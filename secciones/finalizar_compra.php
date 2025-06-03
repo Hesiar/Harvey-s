@@ -105,12 +105,50 @@
     <input type="hidden" name="payment_submission" value="1">
     <button type="submit">Pagar</button>
   </form>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
-     document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function() {
         const paymentForm = document.querySelector("form");
-        
+        const cardHolder = document.getElementById("card_holder");
+        const cardNumber = document.getElementById("card_number");
+        const expiry = document.getElementById("expiry");
+        const cvv = document.getElementById("cvv");
+
+        function validateInput(input, regex, errorMsg) {
+            const errorElement = document.createElement("div"); 
+            errorElement.innerHTML = `<strong style="color: red;">${errorMsg}</strong>`; 
+            errorElement.style.display = "none"; 
+            input.parentNode.appendChild(errorElement); 
+            input.addEventListener("input", function() {
+                if (!regex.test(input.value)) {
+                    input.style.border = "2px solid red";
+                    errorElement.innerHTML = `<strong style="color: red;">${errorMsg}</strong>`; 
+                    errorElement.style.display = "block"; 
+                    input.setCustomValidity(errorMsg);
+                } else {
+                    input.style.border = "2px solid green";
+                    errorElement.style.display = "none"; 
+                    input.setCustomValidity("");
+                }
+            });
+        }
+
+        validateInput(cardHolder, /^[a-zA-Z\s]{3,}$/, "Nombre de tarjeta obligatorio (mínimo 3 letras)");
+        validateInput(cardNumber, /^\d{16}$/, "Formato de tarjeta erróneo. Debe tener 16 dígitos");
+        validateInput(expiry, /^(0[1-9]|1[0-2])\/\d{2}$/, "Formato MM/AA inválido");
+        validateInput(cvv, /^\d{3,4}$/, "Debe tener 3 o 4 dígitos");
+
         paymentForm.addEventListener("submit", function(event) {
             event.preventDefault();
+
+            if (!cardHolder.value || !cardNumber.value.match(/^\d{16}$/) || !expiry.value.match(/^(0[1-9]|1[0-2])\/\d{2}$/) || !cvv.value.match(/^\d{3,4}$/)) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error en el formulario",
+                    text: "Por favor, verifica que los campos sean correctos antes de continuar."
+                });
+                return;
+            }
 
             const formData = new FormData(paymentForm);
 
@@ -121,22 +159,42 @@
             .then(response => response.json())
             .then(data => {
                 if (data.status === "ok") {
-                    alert(data.message); 
-                    fetch("verificar_sesion.php") 
+                    Swal.fire({
+                        icon: "success",
+                        iconColor: "#155724",
+                        title: "¡Muchas gracias por tu compra!",
+                        allowOutsideClick: false,
+                        text: data.message,
+                        timer: 4000,
+                        showConfirmButton: false
+                    });
+
+                    setTimeout(() => {
+                        fetch("verificar_sesion.php")
                         .then(response => response.json())
                         .then(sessionData => {
                             window.location.href = "/Harvey-s/layout/home.php";
                         });
-                    } else {
-                        alert("Error: " + data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error("Error en la solicitud:", error);
-                    alert("Ocurrió un error al procesar el pago.");
-                });
+                    }, 4000);
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        iconColor: "#fa0505",
+                        title: "Error en el pago",
+                        allowOutsideClick: false,
+                        text: "Hubo un problema al procesar tu pago.",
+                        showCancelButton: true,
+                        confirmButtonText: "Reintentar",
+                        confirmButtonColor: "#155724",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                        }
+                    });
+                }
             });
         });
-    </script>
+    });
+  </script>
 </body>
 </html>
