@@ -1,8 +1,15 @@
 <?php
     session_start();
+    ob_start();
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['payment_submission'])) {
-        header('Content-Type: application/json'); 
+    $host = 'localhost';
+    $dbname = 'harveys_DB';
+    $dbuser = 'root';
+    $dbpass = '';
+
+    try {
+        $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $dbuser, $dbpass);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         if (isset($_SESSION['usuario_id'])) {
             $cart_id = $_SESSION['usuario_id'];
@@ -13,14 +20,41 @@
             $cart_id = $_SESSION['guest_id'];
         }
 
-        $host   = 'localhost';
-        $dbname = 'harveys_DB';
-        $dbuser = 'root';
-        $dbpass = '';
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM carritos WHERE usuario_id = :cart_id");
+        $stmt->execute([':cart_id' => $cart_id]);
+        $totalProductos = $stmt->fetchColumn();
+
+        if ($totalProductos == 0) {
+            header("Location: /Harvey-s/layout/home.php");
+            exit;
+        }
+    } catch (PDOException $e) {
+        die("Error: " . $e->getMessage());
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['payment_submission'])) {
+        header('Content-Type: application/json');
 
         try {
-            $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $dbuser, $dbpass);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            if (isset($_SESSION['usuario_id'])) {
+                $cart_id = $_SESSION['usuario_id'];
+                $nombreUsuario = $_SESSION['usuario_nombre'] ?? 'Cliente';
+
+                $stmt = $pdo->prepare("SELECT email FROM clientes WHERE id = :usuario_id");
+                $stmt->execute([':usuario_id' => $cart_id]);
+                $cliente = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                $destinatario = $cliente['email'] ?? ($_POST['guest_email'] ?? null);
+            } else {
+                $cart_id = $_SESSION['guest_id'];
+                $nombreUsuario = 'Cliente Invitado';
+                $destinatario = $_POST['guest_email'] ?? null;
+            }
+
+            if (!$destinatario) {
+                echo json_encode(['status' => 'error', 'message' => 'Debes ingresar un correo electrónico para recibir el ticket.']);
+                exit;
+            }
 
             $stmt = $pdo->prepare("SELECT producto, cantidad, precio FROM carritos WHERE usuario_id = :cart_id");
             $stmt->execute([':cart_id' => $cart_id]);
@@ -31,10 +65,13 @@
                 $totalPrecio += $producto['precio'] * $producto['cantidad'];
             }
 
-            $paymentData = [
-                'amount' => $totalPrecio,
-                'payment_method' => 'Credit Card'
-            ];
+            if ($totalPrecio <= 0) {
+                ob_end_clean();
+                echo json_encode(['status' => 'error', 'message' => 'El total de la compra no puede ser 0€.']);
+                exit;
+            }
+
+            $paymentData = ['amount' => $totalPrecio, 'payment_method' => 'Credit Card'];
             $api_url = "https://apitpoint.com/api/payMock.php";
             $ch = curl_init($api_url);
             curl_setopt($ch, CURLOPT_POST, 1);
@@ -46,6 +83,20 @@
             $paymentResponse = json_decode($response, true);
 
             if ($paymentResponse && $paymentResponse['status'] === 'Success') {
+                $stmt = $pdo->prepare("INSERT INTO ventas (cliente_id, fecha) VALUES (:cliente_id, NOW())");
+                $stmt->execute([':cliente_id' => isset($_SESSION['usuario_id']) ? $_SESSION['usuario_id'] : null]);
+                $venta_id = $pdo->lastInsertId();
+
+                foreach ($carrito as $producto) {
+                    $stmt = $pdo->prepare("INSERT INTO detalle_ventas (venta_id, producto_id, cantidad, subtotal) VALUES (:venta_id, (SELECT id FROM productos WHERE nombre = :producto), :cantidad, :subtotal)");
+                    $stmt->execute([
+                        ':venta_id' => $venta_id,
+                        ':producto' => $producto['producto'],
+                        ':cantidad' => $producto['cantidad'],
+                        ':subtotal' => $producto['precio'] * $producto['cantidad']
+                    ]);
+                }
+
                 $stmt = $pdo->prepare("DELETE FROM carritos WHERE usuario_id = :cart_id");
                 $stmt->execute([':cart_id' => $cart_id]);
 
@@ -57,19 +108,20 @@
                     ]);
                 }
 
-                echo json_encode([
-                    'status' => 'ok',
-                    'message' => 'Compra finalizada con éxito. ¡Gracias por tu pedido!'
-                ]);
+                require '../correos/pdf_compra.php';
+                require '../correos/correo_ticket.php';
+                enviarCorreoTicket($destinatario, $nombreUsuario);
+
+                ob_end_clean();
+                echo json_encode(['status' => 'ok', 'message' => 'Compra finalizada con éxito. Ticket enviado al correo.']);
             } else {
-                echo json_encode([
-                    'status' => 'error',
-                    'message' => 'Error en el pago.'
-                ]);
+                ob_end_clean();
+                echo json_encode(['status' => 'error', 'message' => 'Error en el pago.']);
             }
             exit;
-
         } catch (PDOException $e) {
+            ob_end_clean();
+            var_dump($response);
             echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
             exit;
         }
@@ -93,8 +145,11 @@
     <label for="card_holder">Nombre en la tarjeta:</label>
     <input type="text" id="card_holder" name="card_holder" required>
 
-    <label for="card_number">Número de tarjeta:</label>
-    <input type="text" id="card_number" name="card_number" required>
+    <div class="card-container">
+        <label for="card_number">Número de tarjeta:</label>
+        <input type="text" id="card_number" name="card_number" required oninput="showCardIcon()">
+        <span id="card-icon" class="card-icon"></span>
+    </div>
 
     <label for="expiry">Fecha de expiración (MM/AA):</label>
     <input type="text" id="expiry" name="expiry" required>
@@ -102,99 +157,71 @@
     <label for="cvv">CVV:</label>
     <input type="text" id="cvv" name="cvv" required>
 
+    <?php if (!isset($_SESSION['usuario_id'])): ?>
+        <label for="guest_email">Correo electrónico para recibir el ticket:</label>
+        <input type="email" id="guest_email" name="guest_email" required>
+    <?php endif; ?>
+
     <input type="hidden" name="payment_submission" value="1">
     <button type="submit">Pagar</button>
+
+    <br>
+    <div id="tarjetas_aceptadas">
+        <img src="../elementos/pics/visa-mastercard-discover-american-express-icons.png" alt="Tarjetas aceptadas">
+    </div>
   </form>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const paymentForm = document.querySelector("form");
-        const cardHolder = document.getElementById("card_holder");
-        const cardNumber = document.getElementById("card_number");
-        const expiry = document.getElementById("expiry");
-        const cvv = document.getElementById("cvv");
+        function showCardIcon() {
+            const cardNumber = document.getElementById("card_number").value;
+            const cardIcon = document.getElementById("card-icon");
 
-        function validateInput(input, regex, errorMsg) {
-            const errorElement = document.createElement("div"); 
-            errorElement.innerHTML = `<strong style="color: red;">${errorMsg}</strong>`; 
-            errorElement.style.display = "none"; 
-            input.parentNode.appendChild(errorElement); 
-            input.addEventListener("input", function() {
-                if (!regex.test(input.value)) {
-                    input.style.border = "2px solid red";
-                    errorElement.innerHTML = `<strong style="color: red;">${errorMsg}</strong>`; 
-                    errorElement.style.display = "block"; 
-                    input.setCustomValidity(errorMsg);
-                } else {
-                    input.style.border = "2px solid green";
-                    errorElement.style.display = "none"; 
-                    input.setCustomValidity("");
-                }
-            });
-        }
+            cardIcon.style.backgroundImage = "";
 
-        validateInput(cardHolder, /^[a-zA-Z\s]{3,}$/, "Nombre de tarjeta obligatorio (mínimo 3 letras)");
-        validateInput(cardNumber, /^\d{16}$/, "Formato de tarjeta erróneo. Debe tener 16 dígitos");
-        validateInput(expiry, /^(0[1-9]|1[0-2])\/\d{2}$/, "Formato MM/AA inválido");
-        validateInput(cvv, /^\d{3,4}$/, "Debe tener 3 o 4 dígitos");
+            let cardType = "";
 
-        paymentForm.addEventListener("submit", function(event) {
-            event.preventDefault();
-
-            if (!cardHolder.value || !cardNumber.value.match(/^\d{16}$/) || !expiry.value.match(/^(0[1-9]|1[0-2])\/\d{2}$/) || !cvv.value.match(/^\d{3,4}$/)) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Error en el formulario",
-                    text: "Por favor, verifica que los campos sean correctos antes de continuar."
-                });
-                return;
+            switch (true) {
+                case /^4/.test(cardNumber):
+                    cardType = "visa";
+                    break;
+                case /^5[1-5]/.test(cardNumber):
+                case /^222[1-9]/.test(cardNumber):
+                case /^22[3-9]/.test(cardNumber):
+                case /^2[3-6]/.test(cardNumber):
+                case /^27[0-1]/.test(cardNumber):
+                    cardType = "mastercard";
+                    break;
+                case /^3[47]/.test(cardNumber):
+                    cardType = "amex";
+                    break;
+                case /^6(011|5|4[4-9]|22[1-9]|22[6-9]|62[2-9]|64[4-9]|65)/.test(cardNumber):
+                    cardType = "discover";
+                    break;
+                default:
+                    cardType = "";
             }
 
-            const formData = new FormData(paymentForm);
+            switch (cardType) {
+                case "visa":
+                    cardIcon.style.backgroundImage = "url('/Harvey-s/elementos/pics/visa.png')";
+                    break;
+                case "mastercard":
+                    cardIcon.style.backgroundImage = "url('/Harvey-s/elementos/pics/mastercard.png')";
+                    break;
+                case "amex":
+                    cardIcon.style.backgroundImage = "url('/Harvey-s/elementos/pics/americanexpress.png')";
+                    break;
+                case "discover":
+                    cardIcon.style.backgroundImage = "url('/Harvey-s/elementos/pics/discover.png')";
+                    break;
+                default:
+                    cardIcon.style.backgroundImage = "";
+            }
 
-            fetch("finalizar_compra.php", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === "ok") {
-                    Swal.fire({
-                        icon: "success",
-                        iconColor: "#155724",
-                        title: "¡Muchas gracias por tu compra!",
-                        allowOutsideClick: false,
-                        text: data.message,
-                        timer: 4000,
-                        showConfirmButton: false
-                    });
-
-                    setTimeout(() => {
-                        fetch("verificar_sesion.php")
-                        .then(response => response.json())
-                        .then(sessionData => {
-                            window.location.href = "/Harvey-s/layout/home.php";
-                        });
-                    }, 4000);
-                } else {
-                    Swal.fire({
-                        icon: "error",
-                        iconColor: "#fa0505",
-                        title: "Error en el pago",
-                        allowOutsideClick: false,
-                        text: "Hubo un problema al procesar tu pago.",
-                        showCancelButton: true,
-                        confirmButtonText: "Reintentar",
-                        confirmButtonColor: "#155724",
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            location.reload();
-                        }
-                    });
-                }
-            });
-        });
-    });
+            console.log("Tipo de tarjeta detectado:", cardType);
+            console.log("Imagen asignada:", cardIcon.style.backgroundImage);
+        }
   </script>
+<script src="/Harvey-s/elementos/scripts/script_plataforma_pago.js"></script>
 </body>
 </html>

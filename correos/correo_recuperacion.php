@@ -15,7 +15,6 @@
 
         try {
             $mail->isSMTP();
-            $mail->SMTPDebug = 0;
             $mail->Host       = $_ENV['SMTP_HOST'];
             $mail->SMTPAuth   = true;
             $mail->Username   = $_ENV['SMTP_USERNAME'];

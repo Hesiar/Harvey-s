@@ -57,6 +57,20 @@
         $stmt = $pdo->prepare("SELECT producto, cantidad, precio FROM carritos WHERE usuario_id = :cart_id");
         $stmt->execute([':cart_id' => $cart_id]);
         $carrito = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $descuento = 0;
+        if (isset($_SESSION['usuario_id'])) {
+            $stmt = $pdo->prepare("SELECT empleado_id FROM clientes WHERE id = :usuario_id");
+            $stmt->execute([':usuario_id' => $_SESSION['usuario_id']]);
+            $cliente = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($cliente) {
+                $descuento += 5; 
+                if (!empty($cliente['empleado_id'])) {
+                    $descuento += 3;
+                }
+            }
+        }
     } catch (PDOException $e) {
         die("Error: " . $e->getMessage());
     }
@@ -67,6 +81,7 @@
         $totalProductos += $producto['cantidad'];
         $totalPrecio += $producto['precio'] * $producto['cantidad'];
     }
+    $precioFinal = $totalPrecio * ((100 - $descuento) / 100);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -95,29 +110,31 @@
           <th>Precio</th>
           <th>Cantidad</th>
           <th>Total</th>
-          <th>Acciones</th>
+          <th></th>
       </tr>
       <?php foreach ($carrito as $producto): ?>
-      <tr>
-          <td><?php echo htmlspecialchars($producto['producto']); ?></td>
-          <td><?php echo number_format($producto['precio'], 2); ?>€</td>
-          <td>
-              <input type="number" value="<?php echo $producto['cantidad']; ?>" min="1" 
-                     onchange="actualizarCantidad('<?php echo htmlspecialchars($producto['producto']); ?>', this.value)"
-                     class="custom-number">
-          </td>
-          <td><?php echo number_format($producto['precio'] * $producto['cantidad'], 2); ?>€</td>
-          <td>
-              <button onclick="eliminarProducto('<?php echo htmlspecialchars($producto['producto']); ?>')">
-                  <i class="fas fa-trash"></i> Eliminar
-              </button>
-          </td>
-      </tr>
+            <tr>
+                <td><?php echo htmlspecialchars($producto['producto']); ?></td>
+                <td><?php echo number_format($producto['precio'], 2); ?>€</td>
+                <td>
+                    <input type="number" value="<?php echo $producto['cantidad']; ?>" min="1" 
+                            onchange="actualizarCantidad('<?php echo htmlspecialchars($producto['producto']); ?>', this.value)"
+                            class="custom-number">
+                </td>
+                <td><?php echo number_format($producto['precio'] * $producto['cantidad'], 2); ?>€</td>
+                <td>
+                    <button onclick="eliminarProducto('<?php echo htmlspecialchars($producto['producto']); ?>')">
+                        <i class="fas fa-trash"></i> Eliminar
+                    </button>
+                </td>
+            </tr>
       <?php endforeach; ?>
   </table>
 
   <p>Total productos: <span id="total-productos"><?php echo $totalProductos; ?></span></p>
   <p>Total precio: <span id="total-precio"><?php echo number_format($totalPrecio, 2); ?>€</span></p>
+  <p>Descuento aplicado: <span id="descuento"><?php echo $descuento; ?>%</span></p>
+  <p><strong>Precio final: <span id="precio-final"><?php echo number_format($precioFinal, 2); ?>€</span></strong></p>
 
   <button onclick="finalizarCompra()">Finalizar compra</button>
 
@@ -128,6 +145,15 @@
   <script src="/Harvey-s/elementos/scripts/scripts_home.js"></script>
   <script src="/Harvey-s/elementos/busqueda/script_buscar_categoria.js"></script>
   <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const finalizarBtn = document.querySelector("button[onclick='finalizarCompra()']");
+        const totalPrecio = parseFloat(document.getElementById("total-precio").textContent.replace("€", ""));
+
+        if (totalPrecio === 0) {
+            finalizarBtn.disabled = true;
+        }
+    });
+
     function actualizarCantidad(producto, nuevaCantidad) {
         fetch('../secciones/carrito/actualizar_carrito.php', {
             method: 'POST',
@@ -147,7 +173,7 @@
     function finalizarCompra() {
         window.location.href = '../secciones/finalizar_compra.php';
     }
-
+    
   </script>
 </body>
 </html>
