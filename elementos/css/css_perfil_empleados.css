@@ -1,0 +1,237 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+}
+
+.perfil, .editar-perfil {
+    background: #fcf0ce;
+    width: 70%;
+    max-width: 1000px;
+    margin: auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.perfil h2 {
+    text-align: center;
+}
+
+.perfil p {
+    display: flex;
+    align-items: center; 
+    width: 60%;
+    margin: auto;
+    text-align: left;
+}
+
+.perfil strong {
+    display: inline-block;
+    width: 325px; 
+    text-align: left; 
+    padding-right: 10px;
+    padding-top: 10px;
+}
+
+.perfil span {
+    flex-grow: 15;
+    padding-top: 10px;
+}
+
+.editar-perfil {
+    width: 40%;
+    max-width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hijo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+h2 {
+    color: #005B1C;
+    text-align: center;
+    font-size: 28px;
+}
+
+p {
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.aviso {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+strong {
+    color: #000000;
+}
+
+.editar-perfil form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.editar-perfil label {
+    font-weight: bold;
+    display: block;
+    margin: 10px 0 5px;
+}
+
+.editar-perfil input {
+    width: 40%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between; 
+    width: 80%; 
+    margin-top: 10px;
+}
+
+button#editar {
+    background-color: #005B1C;
+    color: white; 
+    padding: 12px 25px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 18px; 
+    display: block; 
+    margin: 20px auto; 
+    transition: background-color 0.3s ease; 
+} 
+
+button#editar:hover { 
+    background-color: #007F2E; 
+}
+
+button[type="submit"], button#cancelar-edicion {
+    width: 48%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+button[type="submit"] {
+    background-color: #005B1C;
+    color: white;
+}
+
+button[type="submit"]:hover {
+    background-color: #007F2E;
+}
+
+button#cancelar-edicion {
+    background-color: #e74c3c;
+    color: white;
+}
+
+button#cancelar-edicion:hover {
+    background-color: #c0392b;
+}
+
+.perfil span {
+    word-wrap: break-word; 
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+@media screen and (max-width: 600px) {
+    
+    .perfil, 
+    .editar-perfil {
+        width: 90%;          
+        max-width: none;     
+        padding: 20px;       
+    }
+    
+    .perfil h2 {
+        text-align: center;
+        font-size: 22px;     
+    }
+    .perfil p {
+        display: flex;
+        align-items: center; 
+        width: 90%;          
+        margin: 10px auto;   
+        text-align: left;
+    }
+    
+    .perfil strong {
+        display: inline-block;
+        width: 120px;        
+        text-align: left; 
+        padding-right: 10px;
+        padding-top: 5px;    
+        font-size: 16px;     
+    }
+    
+    .perfil span {
+        flex-grow: 1;
+        padding-top: 5px;
+        font-size: 16px;
+    }
+    
+    .editar-perfil {
+        width: 90%;          
+    }
+    
+    .editar-perfil form {
+        width: 100%;
+    }
+    
+    .editar-perfil input {
+        width: 80%;          
+        padding: 6px;
+        margin-bottom: 15px;
+        font-size: 14px;     
+    }
+    
+    .button-container {
+        display: flex;
+        flex-direction: column;  
+        align-items: center;
+        width: 100%;
+        margin-top: 10px;
+        gap: 10px;               
+    }
+    
+    button[type="submit"],
+    button#cancelar-edicion {
+        width: 90%;          
+        font-size: 16px;     
+        padding: 10px;       
+    }
+
+    button#editar {
+        padding: 10px 20px;  
+        font-size: 16px;     
+        margin: 20px auto;
+    }
+    
+    p {
+        font-size: 16px;
+    }
+}
