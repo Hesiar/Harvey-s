@@ -1,0 +1,268 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.fondo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../pics/huertourbano.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+h2 {
+    color: white;
+    background-color: #005B1C;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 28px;
+    text-align: center;
+    width: 50%;
+    margin: 20px auto;
+    margin-bottom: 50px;
+}
+
+h3 {
+    color: #005B1C;
+    text-align: center;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin: 10px 0 5px;
+    text-align: left;
+}
+
+input {
+    width: 90%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#card_number {
+    margin-top: 20px;
+}
+
+.card-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-icon {
+    margin-top: 5px;
+    width: 80px;
+    height: 50px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+button {
+    background-color: #005B1C;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+    width: 30%;
+}
+
+button:hover {
+    background-color: #007F2E;
+}
+
+.contenido {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-areas: "form tarjetas";
+    gap: 10px;
+    max-width: 1200px; 
+    margin: 0 auto;
+    justify-content: center;
+    justify-items: center; 
+    align-items: start;
+}
+
+.form-wrapper {
+    grid-area: form;
+    background-color: #fcf0ce;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #333;
+    padding: 30px;
+    width: 75%;        
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+#tarjetas_aceptadas {
+    grid-area: tarjetas;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#tarjetas_aceptadas h3 {
+    color: white;
+    background-color: #005B1C;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    text-align: center;
+}
+
+#tarjetas_aceptadas img {
+    max-width: 100%;
+}
+
+.error-cardNumber {
+    display: block;
+    width: 100%;
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
+.logo-harveys {
+    width: 150px;
+    height: auto;
+    margin: 20px auto;
+}
+
+.swal2-popup {
+    font-family: Arial, sans-serif !important;
+    background-color: #ffffff !important;
+    border-radius: 10px !important;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2) !important;
+    width: auto !important;
+    max-width: 400px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
+.swal2-title {
+    font-size: 22px !important;
+    color: #155724 !important; 
+    font-weight: bold !important;
+    background: none !important; 
+    text-align: center !important; 
+    display: block !important;
+    width: 100% !important;
+    position: relative !important;
+    left: 50% !important;
+    transform: translateX(-45%) !important;
+}
+
+.swal2-html-container {
+    font-size: 18px !important;
+    color: #000000 !important;
+}
+
+.swal2-confirm {
+    background-color: #155724 !important;
+    color: white !important;
+    font-size: 18px !important;
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+    width: 150px !important;
+}
+
+.swal2-confirm:hover {
+    background-color: #007F2E !important;
+}
+
+.swal2-cancel {
+    background-color: #fa0505 !important;
+    color: white !important;
+    font-size: 18px !important;
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+    width: 150px !important;
+}
+
+.swal2-cancel:hover {
+    background-color: #c00000 !important;
+}
+
+
+@media screen and (max-width: 900px) {
+    .contenido {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "tarjetas"
+            "form";
+        width: 80%;
+    }
+
+    #tarjetas_aceptadas {
+        order: -1;
+        width: 50%;
+        margin-bottom: 15px;
+    }
+    .form-wrapper {
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    form {
+        width: 90%;
+        padding: 20px;
+    }
+    h2 {
+        width: 80%;
+        font-size: 24px;
+    }
+    .card-icon {
+        margin-top: 12px;
+        width: 80px;
+        height: 50px;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    button {
+        font-size: 16px;
+        padding: 10px;
+        width: 30%;
+    }
+    
+    .contenido {
+        display: flex;
+        flex-direction: column;
+        align-items: center;  
+        width: 100%; 
+    }
+
+    #tarjetas_aceptadas {
+        width: 75%;
+        margin-top: 10px;
+        margin-bottom: -10px;
+    }
+
+    .form-wrapper {
+        width: 90%;
+        margin: 30px 30px;
+    }
+}

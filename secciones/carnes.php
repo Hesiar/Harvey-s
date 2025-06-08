@@ -17,6 +17,7 @@
         include '../divs/div_secciones.php';
         include '../divs/div_empleados.php';
     ?>
+    <div class="fondo_productos"></div>
     <div class="productos-container">
         <script src="\Harvey-s\elementos\scripts\script_carnes_embutidos.js"></script>
     </div>

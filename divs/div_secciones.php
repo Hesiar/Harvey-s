@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/Harvey-s/elementos/css/css_div_secciones.css">
 <div class='divSecciones'>
     <label for="Cerrar" class="back-button_secciones" id="Cerrar">
         <i class="fas fa-times"></i>

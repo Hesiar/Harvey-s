@@ -17,6 +17,7 @@
         include '../divs/div_secciones.php';
         include '../divs/div_empleados.php';
     ?>
+    <div class="fondo_productos"></div>
     <div class="productos-container">
         <script src="../elementos/scripts/script_bebidas.js"></script>
     </div>

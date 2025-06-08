@@ -34,7 +34,7 @@ function agregarAlCarrito(nombre, precio, imagen) {
     let productoDiv = document.getElementById(`producto-${nombre}`);
     productoDiv.innerHTML = `
       <h2>${nombre}</h2>
-      <p>Precio: ${precio}€</p>
+      <p>Precio: ${precio.toFixed(2)}€</p>
       <img src="${imagen}" alt="${nombre}">
       <div class="control-cantidad">
         <button onclick="eliminarDelCarrito('${nombre}', ${precio}, '${imagen}')" class="btn-eliminar">
@@ -124,7 +124,7 @@ function eliminarDelCarrito(nombre, precio, imagen) {
       let productoDiv = document.getElementById(`producto-${nombre}`);
       productoDiv.innerHTML = `
           <h2>${nombre}</h2>
-          <p>Precio: ${precio}€</p>
+          <p>Precio: ${precio.toFixed(2)}€</p>
           <img src="${imagen}" alt="${nombre}">
           <button id="btn-${nombre}" onclick="agregarAlCarrito('${nombre}', ${precio}, '${imagen}')">
               Añadir al carrito

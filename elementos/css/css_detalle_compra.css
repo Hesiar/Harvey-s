@@ -1,0 +1,238 @@
+.detalle_compra {
+    width: 50%;
+    max-width: 850px;
+    margin: 20px auto;
+    background-color: #fcf0ce;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.fondo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../pics/pago.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+.detalle_compra h2 {
+    text-align: center;
+    color: white;
+    background-color: #005B1C;
+    width: fit-content; 
+    padding: 15px;
+    border-radius: 10px;
+    margin: 10px auto; 
+    display: block; 
+}
+
+.detalle_compra tr:nth-child(even) {
+    background-color: #c9f3bd; 
+}
+
+.detalle_compra tr:nth-child(odd) {
+    background-color: #a0ff8681; 
+}
+
+.detalle_compra table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.detalle_compra th, 
+.detalle_compra td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 2px solid #ffffff;
+}
+
+.detalle_compra th {
+    background-color: #005B1C;
+    color: white;
+    font-size: 16px;
+}
+
+.detalle_compra td input.custom-number {
+    width: 60px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.detalle_compra td button {
+    background-color: #fa0505;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+}
+
+.detalle_compra td button:hover {
+    background-color: #c00000;
+}
+
+.detalle_compra p {
+    font-size: 16px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.detalle_compra .precio_final strong {
+    font-size: 18px;
+    color: #005B1C;
+}
+
+.detalle_compra .finalizar_compra {
+    background-color: #005B1C;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    transition: background-color 0.3s ease;
+}
+
+.detalle_compra .finalizar_compra:hover {
+    background-color: #007F2E;
+}
+
+@media screen and (max-width: 900px) {
+    .detalle_compra {
+        width: 85%;
+        padding: 18px;
+    }
+
+    .detalle_compra h2 {
+        font-size: 24px;
+        width: 70%;
+    }
+
+    .detalle_compra table {
+        width: 95%;
+    }
+
+    .detalle_compra th, .detalle_compra td {
+        font-size: 15px;
+        padding: 11px;
+    }
+
+    .detalle_compra td input.custom-number {
+        width: 55px;
+        font-size: 13px;
+    }
+
+    .detalle_compra td button {
+        font-size: 13px;
+        padding: 7px;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    .detalle_compra {
+        width: 90%;
+        padding: 16px;
+    }
+
+    .detalle_compra h2 {
+        font-size: 22px;
+        width: 80%;
+    }
+
+    .detalle_compra table {
+        width: 100%;
+    }
+
+    .detalle_compra th, .detalle_compra td {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .detalle_compra td input.custom-number {
+        width: 50px;
+        font-size: 12px;
+    }
+
+    .detalle_compra td button {
+        font-size: 12px;
+        padding: 6px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .detalle_compra {
+        width: 95%;
+        padding: 14px;
+    }
+
+    .detalle_compra h2 {
+        font-size: 20px;
+        width: 90%;
+    }
+
+    .detalle_compra table {
+        width: 100%;
+    }
+
+    .detalle_compra th, .detalle_compra td {
+        font-size: 13px;
+        padding: 9px;
+    }
+
+    .detalle_compra td input.custom-number {
+        width: 45px;
+        font-size: 11px;
+    }
+
+    .detalle_compra td button {
+        font-size: 11px;
+        padding: 5px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .detalle_compra {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .detalle_compra h2 {
+        font-size: 18px;
+        width: 100%;
+    }
+
+    .detalle_compra table {
+        width: 100%;
+    }
+
+    .detalle_compra th, .detalle_compra td {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .detalle_compra td input.custom-number {
+        width: 40px;
+        font-size: 10px;
+    }
+
+    .detalle_compra td button {
+        font-size: 10px;
+        padding: 4px;
+    }
+}
+

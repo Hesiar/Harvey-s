@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/Harvey-s/elementos/css/css_div_empleados.css">
 <div class='divEmpleados'>
         <label for="Cerrar" class="back-button_empleados" id="Cerrar">
             <i class="fas fa-times"></i>

@@ -6,7 +6,8 @@
     <link rel="icon" href="../elementos/pics/icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
     <title>Harvey's | Recuperación de contraseña</title>
-    <link rel="stylesheet" href="/Harvey-s/elementos/css/estilos.css">
+    <link rel="stylesheet" href="/Harvey-s/elementos/css/css_recuperacion.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
@@ -119,7 +120,22 @@
                     error = true;
                 }
 
-                $("button[type='submit']").prop("disabled", error);
+                let boton = $("button[type='submit']");
+                boton.prop("disabled", error);
+
+                if (error) {
+                    boton.css({
+                        "background-color": "#ccc",
+                        "cursor": "not-allowed",
+                        "opacity": "0.5"
+                    });
+                } else {
+                    boton.css({
+                        "background-color": "#005B1C",
+                        "cursor": "pointer",
+                        "opacity": "1"
+                    });
+                }
             }
 
             verificarCampos();

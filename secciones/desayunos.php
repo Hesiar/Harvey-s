@@ -20,6 +20,7 @@
     <div class="productos-container">
         <script src="/Harvey-s/elementos/scripts/script_desayunos_dulces_frutos_secos.js"></script>
     </div>
+    <div class="fondo_productos"></div>
     <?php
         include '../layout/footer.php';
     ?>

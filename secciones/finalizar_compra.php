@@ -133,45 +133,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../elementos/css/css_clientes.css">
+  <link rel="stylesheet" href="../elementos/css/css_pagos.css">
   <link rel="icon" href="../elementos/pics/icon.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
   <title>Harvey's | Plataforma de Pago Ficticia</title>
 </head>
 <body>
-  <h2>Plataforma de Pago Ficticia</h2>
-  <form action="finalizar_compra.php" method="POST">
-    <h3>Datos de Pago</h3>
-    <label for="card_holder">Nombre en la tarjeta:</label>
-    <input type="text" id="card_holder" name="card_holder" required>
+    <div class="fondo"></div>
+    <h2>Plataforma de Pago Ficticia</h2>
+    <div class="contenido">
+        <div id="tarjetas_aceptadas">
+            <h3>Tarjetas Aceptadas</h3>
+            <img src="../elementos/pics/visa-mastercard-discover-american-express-icons.png" alt="Tarjetas aceptadas">
+            <img src="../elementos/pics/Harveys_logo.png" alt="Logo de Harvey's" class="logo-harveys">
+        </div>
+        
+        <div class="form-wrapper">
+            <form action="finalizar_compra.php" method="POST">
+                <h3>Datos de Pago</h3>
+                <label for="card_holder">Nombre en la tarjeta:</label>
+                <input type="text" id="card_holder" name="card_holder" required>
 
-    <div class="card-container">
-        <label for="card_number">Número de tarjeta:</label>
-        <input type="text" id="card_number" name="card_number" required oninput="showCardIcon()">
-        <span id="card-icon" class="card-icon"></span>
+                <div class="card-container">
+                    <label for="card_number">Número de tarjeta:</label>
+                    <input type="text" id="card_number" name="card_number" required oninput="showCardIcon()">
+                    <span id="card-icon" class="card-icon"></span>
+                </div>
+                <p class="error-cardNumber"></p>
+
+                <label for="expiry">Fecha de expiración (MM/AA):</label>
+                <input type="text" id="expiry" name="expiry" required>
+
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" name="cvv" required>
+
+                <?php if (!isset($_SESSION['usuario_id'])): ?>
+                    <label for="guest_email">Correo electrónico para recibir el ticket:</label>
+                    <input type="email" id="guest_email" name="guest_email" required>
+                <?php endif; ?>
+
+                <input type="hidden" name="payment_submission" value="1">
+                <button type="submit">Pagar</button>
+            </form>
+        </div>
     </div>
-
-    <label for="expiry">Fecha de expiración (MM/AA):</label>
-    <input type="text" id="expiry" name="expiry" required>
-
-    <label for="cvv">CVV:</label>
-    <input type="text" id="cvv" name="cvv" required>
-
-    <?php if (!isset($_SESSION['usuario_id'])): ?>
-        <label for="guest_email">Correo electrónico para recibir el ticket:</label>
-        <input type="email" id="guest_email" name="guest_email" required>
-    <?php endif; ?>
-
-    <input type="hidden" name="payment_submission" value="1">
-    <button type="submit">Pagar</button>
-
-    <br>
-    <div id="tarjetas_aceptadas">
-        <img src="../elementos/pics/visa-mastercard-discover-american-express-icons.png" alt="Tarjetas aceptadas">
-    </div>
-  </form>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
         function showCardIcon() {
             const cardNumber = document.getElementById("card_number").value;
             const cardIcon = document.getElementById("card-icon");
@@ -221,7 +229,7 @@
             console.log("Tipo de tarjeta detectado:", cardType);
             console.log("Imagen asignada:", cardIcon.style.backgroundImage);
         }
-  </script>
-<script src="/Harvey-s/elementos/scripts/script_plataforma_pago.js"></script>
+    </script>
+    <script src="/Harvey-s/elementos/scripts/script_plataforma_pago.js"></script>
 </body>
 </html>

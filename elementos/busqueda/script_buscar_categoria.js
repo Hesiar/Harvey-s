@@ -31,3 +31,18 @@ $(document).ready(function(){
         }
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const inputBusqueda = document.querySelector(".campo-busqueda");
+    const listaSugerencias = document.querySelector(".lista-sugerencias");
+
+    listaSugerencias.style.display = "none";
+
+    inputBusqueda.addEventListener("input", function () {
+        if (inputBusqueda.value.trim() === "") {
+            listaSugerencias.style.display = "none";
+        } else {
+            listaSugerencias.style.display = "block";
+        }
+    });
+});

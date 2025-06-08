@@ -1,0 +1,81 @@
+.divCarrito {
+    background: #C5D3DB; 
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #333;
+    padding: 20px;
+    width: 50%;
+    max-width: 300px;
+    height: auto;
+    max-height: 250px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.back-button-carrito {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.divCarrito h2 {
+    color: #005B1C;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.divCarrito p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.ver-carrito, .borrar-carrito {
+    background-color: #005B1C;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: 60%;
+    margin-top: 10px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.ver-carrito:hover, .borrar-carrito:hover {
+    background-color: #007F2E;
+}
+
+.borrar-carrito {
+    background-color: #fa0505;
+}
+
+.borrar-carrito:hover {
+    background-color: #c00000;
+}
+
+@media screen and (max-width: 600px) {
+    .divCarrito {
+        padding: 15px;
+        width: 90%;
+    }
+
+    .divCarrito h2 {
+        font-size: 20px;
+    }
+
+    .divCarrito p {
+        font-size: 14px;
+    }
+
+    .ver-carrito, .borrar-carrito {
+        font-size: 12px;
+        padding: 8px;
+        width: 90%;
+    }
+}

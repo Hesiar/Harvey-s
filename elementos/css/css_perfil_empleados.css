@@ -7,12 +7,12 @@ body {
 
 .perfil, .editar-perfil {
     background: #fcf0ce;
+    border-radius: 10px;
+    box-shadow: #333 0px 0px 10px;
     width: 70%;
     max-width: 1000px;
     margin: auto;
     padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 .perfil h2 {
@@ -36,9 +36,16 @@ body {
 }
 
 .perfil span {
-    flex-grow: 15;
+    display: inline-block; 
     padding-top: 10px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    min-width: 300px; 
+    max-width: 80%; 
+    text-align: left; 
 }
+
 
 .editar-perfil {
     width: 40%;
@@ -74,7 +81,7 @@ p {
 }
 
 strong {
-    color: #000000;
+    color: #333;
 }
 
 .editar-perfil form {
@@ -152,13 +159,54 @@ button#cancelar-edicion:hover {
     background-color: #c0392b;
 }
 
-.perfil span {
-    word-wrap: break-word; 
-    overflow-wrap: break-word;
-    word-break: break-word;
+@media screen and (max-width: 1241px) and (min-width: 705px) {
+    
+    .perfil, .editar-perfil {
+        width: 80%; 
+        padding: 25px;
+    }
+
+    .perfil h2 {
+        font-size: 24px; 
+    }
+
+    .perfil p {
+        width: 80%; 
+        font-size: 17px;
+    }
+
+    .perfil strong {
+        width: 200px; 
+        font-size: 17px;
+    }
+
+    .perfil span {
+        font-size: 16px;
+        min-width: 250px;
+        max-width: 90%;
+    }
+
+    .editar-perfil input {
+        width: 60%;
+    }
+
+    .button-container {
+        width: 90%;
+    }
+
+    button[type="submit"],
+    button#cancelar-edicion {
+        width: 48%;
+        font-size: 17px;
+        padding: 10px;
+    }
+
+    button#editar {
+        font-size: 17px;
+    }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 704px) {
     
     .perfil, 
     .editar-perfil {
@@ -189,9 +237,11 @@ button#cancelar-edicion:hover {
     }
     
     .perfil span {
-        flex-grow: 1;
         padding-top: 5px;
-        font-size: 16px;
+        font-size: 14px;
+        min-width: 200px;
+        max-width: 100%;
+        text-align: left;
     }
     
     .editar-perfil {

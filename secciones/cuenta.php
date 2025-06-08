@@ -30,11 +30,14 @@
     <meta charset="UTF-8">
     <title>Mi Cuenta</title>
     <link rel="stylesheet" href="../elementos/css/css_clientes.css">
+      <link rel="stylesheet" href="../elementos/css/css_cuenta.css">
     <link rel="icon" href="../elementos/pics/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- Iconos de Font Awesome -->
     <title>Harvey's | Cuenta</title>
 </head>
 <body>
+    <div class="fondo"></div>
     <?php 
         include '../layout/header.php';
         include '../divs/div_carrito.php';
@@ -105,6 +108,7 @@
     <script src="/Harvey-s/elementos/scripts/scripts_home.js"></script>
     <script src="/Harvey-s/elementos/scripts/script_cuenta_usuario.js"></script>
     <script src="/Harvey-s/elementos/busqueda/script_buscar_categoria.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 </html>

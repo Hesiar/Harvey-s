@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const expiry = document.getElementById("expiry");
     const cvv = document.getElementById("cvv");
     const guestEmail = document.getElementById("guest_email");
+    const payButton = document.querySelector("button[type='submit']");
 
     function getCardType(number) {
         if (/^4/.test(number)) return "Visa";
@@ -25,6 +26,17 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         errorElement.textContent = message;
         errorElement.style.display = message ? "block" : "none";
+
+        checkFormValidity();
+    }
+
+    function validateEmail() { 
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!guestEmail.value.match(emailRegex)) {
+            createErrorElement(guestEmail, "Ingrese un correo electrónico válido.");
+        } else {
+            createErrorElement(guestEmail, "");
+        }
     }
 
     function validateExpiryDate() {
@@ -67,12 +79,41 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    function checkFormValidity() { 
+        const errors = Array.from(document.querySelectorAll(".error-message"));
+        const hasErrors = errors.some(error => error.textContent.trim() !== "");
+        payButton.disabled = hasErrors;
+        if (hasErrors) {
+            payButton.style.backgroundColor = "grey";
+            payButton.style.cursor = "not-allowed";
+        } else {
+            payButton.style.backgroundColor = "#155724";
+            payButton.style.cursor = "pointer";
+        }
+    }
+
+    guestEmail?.addEventListener("input", function() { 
+        validateEmail();
+        checkFormValidity();
+    });
+
     cardNumber.addEventListener("input", function() {
         validateCardNumber(); 
         validateCVV();
+        checkFormValidity();
     });
-    cvv.addEventListener("input", validateCVV);
-    expiry.addEventListener("input", validateExpiryDate);
+
+    cvv.addEventListener("input", function() {
+        validateCVV();
+        checkFormValidity();
+    });
+
+    expiry.addEventListener("input", function() {
+        validateExpiryDate();
+        checkFormValidity();
+    });
+
+    document.addEventListener("DOMContentLoaded", checkFormValidity);
 
     paymentForm.addEventListener("submit", function(event) {
         event.preventDefault();
@@ -91,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
-        if (document.querySelector(".error-message[style='display: block;']")) {
+        if (payButton.disabled) {
             Swal.fire({
                 icon: "error",
                 iconColor: "#fa0505",

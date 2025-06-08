@@ -50,7 +50,7 @@ h1 {
     padding: 15px;
     border-radius: 5px;
     text-align: center;
-    width: 100%;
+    width: 98%;
     display: block;
 }
 
@@ -91,6 +91,9 @@ a {
     color: white;
     font-weight: bold;
     font-size: 18px;
+    display: block;
+    text-align: center;
+    width: auto;
 }
 
 #secciones_empleados {
@@ -120,25 +123,56 @@ a {
     background-color: #c0392b;
 }
 
+@media screen and (max-width: 900px) {
+
+    h1 {
+        width: 90%;
+    }
+
+    .contenedor-empleados {
+        width: 80%;
+        padding: 30px;
+    }
+
+    #secciones_empleados {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    #secciones_empleados img {
+        width: 80%; 
+        max-width: 250px;
+    }
+}
+
 @media screen and (max-width: 600px) {
     h1 {
-        text-align: center;
-        width: 90%; 
-        margin: 10px auto; 
-        font-size: 24px; 
+        width: 90%;
+        font-size: 22px;
+        padding: 10px;
+    }
+
+    .contenedor-empleados {
+        width: 80%;
+        padding: 20px;
     }
 
     ul {
-        display: flex;
         flex-direction: column; 
-        align-items: center; 
-        width: 100%;
-        gap: 8px;
+        gap: 12px;
     }
 
     a {
-        width: 85%; 
-        font-size: 14px; 
+        font-size: 16px;
+        padding: 12px;
+        width: auto;
+    }
+
+    .btn-salir {
+        font-size: 16px;
+        width: 90%;
         padding: 10px;
     }
 }
+

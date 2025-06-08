@@ -1,0 +1,312 @@
+/* ==================== Perfil de Usuario ==================== */
+
+.perfil {
+    background: #fcf0ce;  
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #333;
+    padding: 20px;
+    width: 50%;
+    max-width: 400px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.fondo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../pics/shopping.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+.perfil h2 {
+    color: #005B1C;
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.perfil p {
+    display: flex;
+    padding-left: 20px;
+    align-items: center;  
+    justify-content: left; 
+    gap: 30px;  
+}
+
+.perfil p strong {
+    font-size: 16px;
+    color: #333;
+    padding-left: 20px; 
+    min-width: 150px; 
+    text-align: left;
+}
+
+.perfil p span {
+    text-align: left; 
+    flex-grow: 1; 
+    overflow: hidden;
+    word-break: break-word;
+    max-width: 180px;
+}
+
+.perfil button {
+    background-color: #005B1C;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px 5px;
+    transition: background-color 0.3s ease;
+    width: 40%;
+}
+
+.perfil button:hover {
+    background-color: #007F2E;
+}
+
+#cerrar-sesion {
+    background-color: #fa0505;
+}
+
+#cerrar-sesion:hover {
+    background-color: #c00000;
+}
+
+
+/* ==================== Formulario de Edición ==================== */
+
+.editar-perfil {
+    background: #fcf0ce;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #333;
+    padding: 20px;
+    width: 50%;
+    max-width: 400px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.editar-perfil h2 {
+    color: #005B1C;
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.editar-perfil label {
+    font-weight: bold;
+    display: block;
+    margin: 10px 0 5px;
+    text-align: left;
+}
+
+.editar-perfil input {
+    width: 90%;
+    max-width: 360px;
+    padding: 8px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.editar-perfil button {
+    background-color: #005B1C;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px 5px;
+    transition: background-color 0.3s ease;
+    width: 45%;
+}
+
+.editar-perfil button:hover {
+    background-color: #007F2E;
+}
+
+#cancelar-edicion {
+    width: 45%;
+    background-color: #fa0505;
+}
+
+#cancelar-edicion:hover {
+    background-color: #c00000;
+}
+
+#eliminar-cuenta {
+    width: 40%;
+    background-color: #971305;
+    margin-top: 15px;
+}
+
+#eliminar-cuenta:hover {
+    background-color: #c00000;
+}
+
+.swal2-popup {
+    font-family: Arial, sans-serif !important;
+    background-color: #ffffff !important;
+    border-radius: 10px !important;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2) !important;
+    width: auto !important;
+    max-width: 400px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
+.swal2-title {
+    font-size: 22px !important;
+    color: #155724 !important;
+    font-weight: bold !important;
+    text-align: center !important;
+}
+
+.swal2-confirm {
+    background-color: #155724 !important;
+    color: white !important;
+    font-size: 18px !important;
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+    width: 150px !important;
+}
+
+.swal2-confirm:hover {
+    background-color: #007F2E !important;
+}
+
+.swal2-cancel {
+    background-color: #fa0505 !important;
+    color: white !important;
+    font-size: 18px !important;
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+    width: 150px !important;
+}
+
+.swal2-cancel:hover {
+    background-color: #c00000 !important;
+}
+
+/* Scroll para navegadores basados en WebKit */
+::-webkit-scrollbar {
+    width: 12px;     
+    height: 8px;    
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 20px; 
+}
+::-webkit-scrollbar-thumb {
+    background: #00681f;     
+    border-radius: 20px;  
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #008d2a;     
+}
+
+/* Para Firefox */
+* {
+    scrollbar-width: thin;                    
+    scrollbar-color: #00681f #f1f1f1;               
+}
+
+.back-button-registro {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 20px;
+}
+
+@media screen and (max-width: 778px) {
+    .perfil, .editar-perfil {
+        width: 90%;
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .perfil p {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start; 
+        gap: 15px; 
+        padding-left: 10px;
+    }
+
+    .perfil p strong {
+        min-width: 120px;
+        text-align: left;
+        padding-left: 10px;
+    }
+
+    .perfil p span {
+        text-align: left;
+        flex-grow: 1;
+        max-width: calc(100% - 140px);
+        word-break: break-word;
+        padding-left: 40px; 
+    }
+
+    .perfil button, .editar-perfil button {
+        width: 45%; 
+        font-size: 14px; 
+        padding: 10px;
+    }
+
+    #eliminar-cuenta, #cancelar-edicion {
+        width: 45%;
+    }
+
+    .fondo {
+        height: 100vh;
+        background-size: cover;
+    }
+
+    .back-button-registro {
+        font-size: 18px;
+        left: 5px;
+        top: 5px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .perfil h2, .editar-perfil h2 {
+        font-size: 22px;
+    }
+
+    .perfil p {
+        flex-direction: column; 
+        gap: 8px; 
+    }
+
+    .perfil p strong {
+        font-size: 16px; 
+        text-align: center;
+    }
+
+    .perfil p span {
+        font-size: 16px;
+        max-width: 100%;
+        word-break: break-word;
+        padding-left: 0px; 
+        margin-top: 2px;
+        margin-bottom: 5px;
+    }
+
+    .perfil button, .editar-perfil button {
+        font-size: 12px;
+        padding: 8px;
+    }
+}

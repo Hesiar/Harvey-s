@@ -1,0 +1,130 @@
+footer {
+    background-color: #005B1C;
+    color: white;
+    padding: 20px 0;
+}
+
+footer .container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 20px;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: -40px;
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+    flex: 1;
+    min-width: 250px;
+    padding: 10px;
+}
+
+.footer-left {
+    text-align: left;
+    margin-left: 20px;
+}
+
+.footer-center {
+    text-align: center;
+}
+
+.footer-right {
+    text-align: right;
+    margin-right: 20px;
+}
+
+.redes-sociales {
+    margin: 15px 0;
+}
+
+.redes-sociales a {
+    color: white;
+    font-size: 20px;
+    margin-right: 10px;
+    transition: color 0.3s ease;
+}
+
+.redes-sociales a:hover {
+    color: #cfe8ff;
+}
+
+.btn-empleados {
+    background-color: white;
+    color: #005B1C;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-empleados:hover {
+    background-color: #C5D3DB;;
+    color: #005B1C;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 0;
+}
+
+.footer-bottom p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+footer a {
+    color: #C5D3DB;;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 1006px) {
+    .footer-top {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;  
+    }
+    
+    .footer-left,
+    .footer-center,
+    .footer-right {
+        width: 100%;
+        margin: 10px 0;
+        text-align: center;
+    }
+    
+    .footer-left {
+        margin-left: 0;
+    }
+    
+    .footer-right {
+        margin-right: 0;
+    }
+    
+    .redes-sociales a {
+        font-size: 18px;
+        margin: 0 5px;
+    }
+    
+    .btn-empleados {
+        width: 80%;
+        margin: 10px auto;
+    }
+    
+    footer p {
+        font-size: 12px;
+    }
+}

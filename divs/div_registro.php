@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/Harvey-s/elementos/css/css_registro.css">
 <div class="divRegistro">
     <label for="Cerrar" class="back-button-registro" id="Cerrar">
         <i class="fas fa-times"></i>

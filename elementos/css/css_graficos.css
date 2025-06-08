@@ -59,11 +59,38 @@ canvas {
     height: auto;
 }
 
-@media screen and (min-width: 601px) {
+@media screen and (min-width: 979px) { 
     canvas {
-         width: 800px;    
-         height: 400px; 
-         max-width: none;
+        width: 800px; 
+        height: 400px;
+    }
+}
+
+@media screen and (max-width: 978px) {
+    .container {
+        max-width: 90%; 
+        padding: 15px;
+    }
+
+    .header h1 {
+        font-size: 26px;
+        padding: 12px 0;
+    }
+
+    .button-container {
+        flex-wrap: wrap; 
+        gap: 15px;
+    }
+
+    .button-container button {
+        font-size: 17px;
+        padding: 10px 20px;
+        width: auto; 
+    }
+
+    canvas {
+        width: 90%; 
+        height: 350px;
     }
 }
 

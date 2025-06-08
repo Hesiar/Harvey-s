@@ -1,7 +1,11 @@
 <?php
     $current_page = basename($_SERVER['PHP_SELF']);
 ?>
-<header>     
+<header>  
+    <link rel="stylesheet" href="../elementos/css/css_busqueda.css">
+    <link rel="stylesheet" href="../elementos/css/css_productos.css">
+    <link rel="stylesheet" href="../elementos/css/css_footer.css">
+
     <div>
         <a href="/Harvey-s/layout/home.php">
             <img src="/Harvey-s/elementos/pics/Harveys_logo.png" alt="Logo de Harvey's">

@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/Harvey-s/elementos/css/css_carrito.css">
 <div class='divCarrito'>
     <label for="Cerrar" class="back-button-carrito" id="Cerrar">
         <i class="fas fa-times"></i>
@@ -5,8 +6,8 @@
     <h2>Carrito</h2>
     <p>Total productos: <span id="total-productos">0</span></p>
     <p>Total precio: <span id="total-precio">0€</span></p>
-    <button class="ver-carrito" onclick="window.location.href='../secciones/detalle_compra.php'">Ver carrito</button>
-    <button class="borrar-carrito">Borrar carrito</button>
+    <button class="ver-carrito" onclick="window.location.href='../secciones/detalle_compra.php'"><i class="fas fa-shopping-cart"></i>    Ver carrito</button>
+    <button class="borrar-carrito"><i class="fas fa-trash"></i>    Borrar carrito</button>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

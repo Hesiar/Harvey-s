@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/Harvey-s/elementos/css/css_login.css">
 <div class='divLogin'>
     <label for="Cerrar" class="back-button" id="Cerrar">
         <i class="fas fa-times"></i>
@@ -8,13 +9,16 @@
         <input type="text" name="correo" placeholder="Correo">
         <label for="contrasenia">Contraseña: </label>
         <input type="password" name="contrasenia" placeholder="Contraseña">
-        <label class="recordar-sesion">
-            <input type="checkbox" name="recordar_sesion"> Recordar sesión
-        </label>
+        <div class="recordar-sesion-container">
+            <input type="checkbox" name="recordar_sesion" id="recordar_sesion">
+            <label for="recordar_sesion">Recordar sesión</label>
+        </div>
         <button type="submit">Iniciar sesión</button>
         <div id="login-response"></div>
-        <p>¿No tienes cuenta? <button type="submit" id="btn-registro">Regístrate aquí</button></p>
-        <p>¿Olvidaste tu contraseña? <button type="submit" id="btn-recuperacion">Recuperar contraseña</button></p>
+        <p>¿No tienes cuenta?</p>
+        <button type="submit" id="btn-registro">Regístrate aquí</button>
+        <p class="recuperar">¿Olvidaste tu contraseña?</p>
+        <button type="submit" id="btn-recuperacion">Recuperar contraseña</button>
     </form>
 </div>
 
